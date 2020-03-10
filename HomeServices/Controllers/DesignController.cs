@@ -6,12 +6,15 @@ using System.Web.Mvc;
 
 namespace HomeServices.Controllers
 {
-    public class HomeController : Controller
+    public class DesignController : Controller
     {
-        public ActionResult Index() {
+        // GET: Design
+        public ActionResult Header()
+        {
             return View();
         }
-
-       
+        public ActionResult Footer() {
+            return View();
+        }
     }
 }

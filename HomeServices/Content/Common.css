@@ -1,0 +1,24 @@
+﻿body{
+    height:100%;
+}
+*{
+   margin-top:0;
+   padding:0;
+}
+header{
+    height:15%;
+    background-color:#daad86;
+    color:white;
+}
+#header-content nav,h1{
+  text-align:center;
+  text-decoration:none;
+}
+article {
+    background-color: #659dbd;
+    height:200%;
+}
+footer{
+    height:10%;
+    background-color:antiquewhite;
+}
