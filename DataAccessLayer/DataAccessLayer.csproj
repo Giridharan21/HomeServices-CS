@@ -61,9 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data.cs" />
-    <Compile Include="Migrations\202003091843458_mig.cs" />
-    <Compile Include="Migrations\202003091843458_mig.Designer.cs">
-      <DependentUpon>202003091843458_mig.cs</DependentUpon>
+    <Compile Include="Migrations\202003110319190_mig.cs" />
+    <Compile Include="Migrations\202003110319190_mig.Designer.cs">
+      <DependentUpon>202003110319190_mig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,8 +85,8 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003091843458_mig.resx">
-      <DependentUpon>202003091843458_mig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003110319190_mig.resx">
+      <DependentUpon>202003110319190_mig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

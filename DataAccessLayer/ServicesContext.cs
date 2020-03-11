@@ -21,6 +21,7 @@ namespace DataAccessLayer
         protected override void OnModelCreating(DbModelBuilder model) {
             model.Entity<Payment>().Property(g => g.Amount).HasPrecision(10, 2);
             model.Entity<Review>().Property(g => g.Stars).HasPrecision(2, 1);
+            model.Entity<BankAccountDetails>().Property(g => g.Balance).HasPrecision(10, 2);
         }
        
 
@@ -39,6 +40,13 @@ namespace DataAccessLayer
     //    public int Id { get; set; }
     //    public string Name { get; set; }
     //}
+
+    public class BankAccountDetails
+    {
+        public int Id { get; set; }
+        public string BankName { get; set; }
+        public decimal Balance { get; set; }
+    }
     public class User
     {
         [Key]
@@ -61,6 +69,11 @@ namespace DataAccessLayer
         public string Location { get; set; }
         [StringLength(16, MinimumLength = 4)]
         public string Service { get; set; }
+        [ForeignKey("BankAccount")]
+        public int BankFK { get; set; }
+
+        public BankAccountDetails BankAccount { get; set; }
+
     }
     public class Order
     {
