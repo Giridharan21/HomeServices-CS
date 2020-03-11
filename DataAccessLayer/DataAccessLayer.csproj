@@ -66,6 +66,7 @@
       <DependentUpon>202003110513286_SURIYA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\RegisterClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesContext.cs" />
   </ItemGroup>
@@ -89,9 +90,7 @@
       <DependentUpon>202003110513286_SURIYA.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

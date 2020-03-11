@@ -1,0 +1,15 @@
+﻿@model DataAccessLayer.Models.RegisterClass
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm("Index", "Register", FormMethod.Post))
+{
+    @Html.EditorForModel()
+    <input type="submit" value="Register" />
+}
+
+
