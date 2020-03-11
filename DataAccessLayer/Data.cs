@@ -8,7 +8,10 @@ namespace DataAccessLayer
 {
     public class Data
     {
-       
+        public static void adduser() {
+            ServicesContext s = new ServicesContext();
+
+        }
 
     }
 }
