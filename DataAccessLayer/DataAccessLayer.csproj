@@ -69,7 +69,12 @@
     <Compile Include="Migrations\202003110927314_mig2.Designer.cs">
       <DependentUpon>202003110927314_mig2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003111104117_mig3.cs" />
+    <Compile Include="Migrations\202003111104117_mig3.Designer.cs">
+      <DependentUpon>202003111104117_mig3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesContext.cs" />
   </ItemGroup>
@@ -95,10 +100,11 @@
     <EmbeddedResource Include="Migrations\202003110927314_mig2.resx">
       <DependentUpon>202003110927314_mig2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111104117_mig3.resx">
+      <DependentUpon>202003111104117_mig3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

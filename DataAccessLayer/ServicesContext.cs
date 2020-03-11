@@ -33,6 +33,7 @@ namespace DataAccessLayer
          public virtual DbSet<Order> Orders  { get; set; }
          public virtual DbSet<Review> Reviews  { get; set; }
          public virtual DbSet<Payment> Payments  { get; set; }
+         public virtual DbSet<BankAccountDetails> BankAccounts  { get; set; }
     }
 
     //public class MyEntity
