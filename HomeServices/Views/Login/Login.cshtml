@@ -1,0 +1,16 @@
+﻿@model DataAccessLayer.Models.Login
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<body>
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+    {
+        @Html.EditorForModel()
+    <input type="Submit" value="Login"/>
+    
+    
+    }
+        
+</body>
+
