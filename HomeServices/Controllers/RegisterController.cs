@@ -10,18 +10,35 @@ namespace HomeServices.Controllers
     public class RegisterController : Controller
     {
         // GET: Register
-        public ActionResult Index()
+        public ActionResult customer()
         {
-            RegisterClass reg = new RegisterClass();
-            reg.Type = new SelectList(new List<string> { "Customer", "Service Provider" });
-            return View(reg);
+        
+            return View();
         }
         [HttpPost]
-        public ActionResult Index(RegisterClass reg)
+        public ActionResult customer(CustomerRegisterClass m)
+        {if (ModelState.IsValid)
+            {
+                Data.adduser(m);
+                return View();
+            }
+            return View();
+        }
+        
+
+   public ActionResult ServiceProvider()
         {
-            reg.Type = new SelectList(new List<string> { "Customer", "Service Provider" });
-            Data.adduser();
-            return View(reg);
+             return View();
+           
+        }
+            [HttpPost]
+        public ActionResult ServiceProvider(SPRegisterClass n) {
+            if (ModelState.IsValid)
+            {
+                Data.registeruser(n);
+                return View();
+            }
+            return View();
         }
 
 
