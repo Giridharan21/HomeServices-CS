@@ -76,9 +76,7 @@ namespace DataAccessLayer
             double average = double.Parse(avg.ToString());
             return average;
         }
-    }
-}
-
+    
 
       public static string Addlogin(Login Model)
         {
