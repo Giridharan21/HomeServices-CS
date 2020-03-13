@@ -1,0 +1,32 @@
+﻿@model DataAccessLayer.Models.CustomerRegisterClass
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm("Index", "Register", FormMethod.Post))
+{
+
+    <span>UserName:</span>@Html.TextBoxFor(g => g.Username);<br />
+    <span>Password:</span>@Html.Password("pass");<br />
+    <span>ConfirmPassword:</span>@Html.Password("pass");<br />
+    <span>Type:</span>@Html.DropDownListFor(g => g.TypeVal, Model.Type, " ");<br />
+    <span>EmailId:</span>@Html.TextBoxFor(g => g.Emailid);<br />
+
+    <span>ContactNumber:</span>@Html.TextBoxFor(g => g.Contact);<br />
+
+    <span>Location:</span>@Html.TextBoxFor(g => g.Location);<br />
+
+    
+
+    <span>BankName:</span>@Html.TextBoxFor(g => g.BankName);<br />
+
+    <span>BankAccount Number:</span>@Html.TextBoxFor(g => g.BankAccNumber);<br />
+
+
+    <input type="submit" value="Register" />
+}
+
+
