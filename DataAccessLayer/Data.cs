@@ -78,13 +78,26 @@ namespace DataAccessLayer
         }
     
 
-      public static string Addlogin(Login Model)
+      public static UserInfoModel Addlogin(Login Model)
         {
             ServicesContext i = new ServicesContext();
-            var res = (from a in i.Users where a.Username == Model.UserName &&
-                       a.Password == Model.Password select a.Type).FirstOrDefault();
-            
-            return res;
+            var LoggedBuffer = (from a in i.Users where a.Username == Model.UserName &&
+                       a.Password == Model.Password select a).FirstOrDefault();
+            UserInfoModel UserModel = new UserInfoModel();
+            if (LoggedBuffer != null)
+            {
+                UserModel = new UserInfoModel()
+                {
+                    Id = LoggedBuffer.Id,
+                    UserName = LoggedBuffer.Username,
+                    Type = LoggedBuffer.Type,
+                    Contact = LoggedBuffer.Contact,
+                    Location = LoggedBuffer.Location,
+                    Service = LoggedBuffer.Service,
+                    BankFk = LoggedBuffer.BankFK
+                };
+            }
+            return UserModel;
 
         }
        
@@ -143,7 +156,28 @@ namespace DataAccessLayer
 
         }
 
-
-    }    
+        public static List<Profile> Profile()
+        {
+            List<Profile> UserDataList = new List<Profile>();
+            ServicesContext Profile = new ServicesContext();
+            var Result = from a in Profile.Users
+                         select a;
+              foreach(var b in Result)
+            {
+                Profile pro = new Profile();
+                pro.Id = b.Id;
+                pro.UserName = b.Username;
+                pro.Passsword = b.Password;
+                pro.Type = b.Type;
+                pro.Contact = b.Contact;
+                pro.Location = b.Location;
+                pro.Service = b.Service;
+                pro.BankFk = b.BankFK;
+                UserDataList.Add(pro);
+            }
+            return UserDataList;
+        }  
+    }   
+    
 }
 
