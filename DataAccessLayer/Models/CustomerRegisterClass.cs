@@ -10,8 +10,12 @@ namespace DataAccessLayer.Models
     public class CustomerRegisterClass
     {
 
-        [Required(ErrorMessage ="UserName Should Be AlphaNumeric.")]
-       // [Range(4, 8)]
+        [MinLength(4, ErrorMessage = "Minimum Length is 4")]
+        [MaxLength(16, ErrorMessage = "Maximum Length is 16")]
+        [Required(ErrorMessage = "It is Required")]
+        [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "UserName Should Be AlphaNumeric.")]
+
+   
 
         public string Username { get; set; }
         [Required(ErrorMessage = "Password is required.")]
