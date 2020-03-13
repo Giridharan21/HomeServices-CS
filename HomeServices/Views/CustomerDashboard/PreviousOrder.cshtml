@@ -1,0 +1,61 @@
+﻿@model List<DataAccessLayer.Models.OrderData>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PreviousOrder</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <td>
+                Order ID
+            </td>
+            <td>
+                Ordered By
+            </td>
+            <td>
+                WorkDone By
+            </td>
+            <td>
+                Status
+            </td>
+            <td>
+                Ordered Date
+            </td>
+            <td>
+                Scheduled Date
+            </td>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>
+                    @i.id
+                </td>
+                <td>
+                    @i.fromid
+                </td>
+                <td>
+                    @i.toid
+                </td>
+                <td>
+                    @i.status
+                </td>
+                <td>
+                    @i.ordereddate
+                </td>
+                <td>
+                    @i.scheduleddate
+                </td>
+            </tr>
+
+        }
+    </table>
+</body>
+</html>
