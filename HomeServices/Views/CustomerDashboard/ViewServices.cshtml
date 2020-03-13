@@ -11,9 +11,9 @@
     <title>PlaceOrder</title>
 </head>
 <body>
-    @using (Html.BeginForm("ServiceProvider", "CustomerDashboard", FormMethod.Post))
+    @using (Html.BeginForm("ViewServiceProvider", "CustomerDashboard", FormMethod.Post))
     {
-        @Html.DropDownList("services", (SelectList)ViewBag.result)
+        @Html.DropDownList("Service", (SelectList)ViewBag.result)
         <input type="submit" value="Select" />
     }
 </body>

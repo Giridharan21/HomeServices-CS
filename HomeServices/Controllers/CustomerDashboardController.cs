@@ -14,29 +14,23 @@ namespace HomeServices.Controllers
         {
             return View();
         }
-        public ActionResult PlaceOrder()
+        public ActionResult ViewServices()
         {
             var result = Data.ServiceList();
             ViewBag.result = new SelectList(result);
             return View();
         }
-        
-        public ActionResult ServiceProvider(string service)
+        [HttpPost]
+        public ActionResult ViewServiceProvider(string Service)
         {
-            var Result = Data.SPList(service);
+            var ServiceProviders = Data.SPList(Service);
             //ViewBag.result = Result;
-            return View(Result);
+            return View(ServiceProviders);
         }
         [HttpPost]
-        public ActionResult ServiceProvider(ServiceProviderList model)
+        public ActionResult PlaceOrder(int ServiceProviderId,DateTime ScheduleDate)
         {
-            ServicesContext serObj = new ServicesContext();
-            Order orderobj = new Order();
-            orderobj.Date = DateTime.Now;
-            orderobj.ScheduleDate = model.scheduledDate;
-            orderobj.ToFK = model.ServiceProviderId;
-            serObj.Orders.Add(orderobj);
-            serObj.SaveChanges();
+            Data.PlaceOrder(ServiceProviderId, ScheduleDate);
             return RedirectToAction("PreviousOrder");
         }
         public ActionResult PreviousOrder()

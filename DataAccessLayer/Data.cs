@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Web.Mvc;
 using DataAccessLayer.Models;
 using DataAccessLayer;
@@ -25,14 +24,14 @@ namespace DataAccessLayer
                       select a;
             foreach(var rec in Result)
             {
-                OrderData o = new OrderData();
-                o.id = rec.Id;
-                o.fromid = rec.FromFK;
-                o.toid = rec.ToFK;
-                o.ordereddate = rec.Date;
-                o.scheduleddate = rec.ScheduleDate;
-                o.status = rec.Status;
-                OrderDataList.Add(o);
+                OrderData OrderObj = new OrderData();
+                OrderObj.id = rec.Id;
+                OrderObj.fromid = rec.FromFK;
+                OrderObj.toid = rec.ToFK;
+                OrderObj.ordereddate = rec.Date;
+                OrderObj.scheduleddate = rec.ScheduleDate;
+                OrderObj.status = rec.Status;
+                OrderDataList.Add(OrderObj);
 
             }
             return OrderDataList;
@@ -49,31 +48,32 @@ namespace DataAccessLayer
 
             return TypeService;
         }
-        public static List<ServiceProviderList> SPList(string service)
+        public static List<ServiceProvider> SPList(string service)
         {
             ServicesContext SerObj = new ServicesContext();
-            List<ServiceProviderList> SPList = new List<ServiceProviderList>();
+            List<ServiceProvider> SPList = new List<ServiceProvider>();
             var SPResult = from a in SerObj.Users
                       where a.Service == service
                       select a;
             
             foreach(var rec in SPResult)
             {
-                ServiceProviderList s = new ServiceProviderList();
-                s.ServiceProviderId = rec.Id;
-                s.ServiceProviderName = rec.Username;
-                s.rating = Data.average(rec.Id);
-                SPList.Add(s);
+                ServiceProvider ServiceObj = new ServiceProvider();
+                ServiceObj.ServiceProviderId = rec.Id;
+                ServiceObj.ServiceProviderName = rec.Username;
+                ServiceObj.Rating = Data.average(rec.Id);
+                //s.CustomerId = (LoginUserInfo)Session["UserData"];
+                SPList.Add(ServiceObj);
                
             }
             return SPList;
         }
         
-        public static double average(int id)
+        public static decimal? average(int id)
         {
             ServicesContext service = new ServicesContext();
             var avg = service.Reviews.Where(i => i.Orders.UserTo.Id == id).Select(i => i.Stars).Average();
-            double average = double.Parse(avg.ToString());
+            decimal? average = avg;
             return average;
         }
     
@@ -142,8 +142,22 @@ namespace DataAccessLayer
 
 
         }
+        public static void PlaceOrder(int ServiceProviderId,DateTime ScheduleDate)
+        {
+            ServicesContext ContextObj = new ServicesContext();
+            Order orderObj = new Order() {Date=DateTime.Now,ScheduleDate=ScheduleDate, FromFK=1, Status="Active", ToFK=ServiceProviderId};
+            ContextObj.Orders.Add(orderObj);
+            ContextObj.SaveChanges();
+            
+        }
+        public static void PlaceOrder(ServiceProvider NewOrder)
+        {
+            ServicesContext ContextObj = new ServicesContext();
+            Order orderObj = new Order() { Date = DateTime.Now, ScheduleDate = NewOrder.ScheduledDate, FromFK = NewOrder.CustomerId, Status = "Active", ToFK = NewOrder.ServiceProviderId };
+            ContextObj.Orders.Add(orderObj);
+            ContextObj.SaveChanges();
 
-
+        }
     }    
 }
 

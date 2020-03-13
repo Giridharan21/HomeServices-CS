@@ -252,9 +252,8 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\CustomerDashboard\Dashboard.cshtml" />
     <Content Include="Views\CustomerDashboard\PreviousOrder.cshtml" />
-    <Content Include="Views\CustomerDashboard\PlaceOrder.cshtml" />
-    <Content Include="Views\CustomerDashboard\ServiceProvider.cshtml" />
-
+    <Content Include="Views\CustomerDashboard\ViewServices.cshtml" />
+    <Content Include="Views\CustomerDashboard\ViewServiceProvider.cshtml" />
     <Content Include="Views\Register\customer.cshtml" />
     <Content Include="Views\Register\ServiceProvider.cshtml" />
     <Content Include="Views\Payment\Payment.cshtml" />

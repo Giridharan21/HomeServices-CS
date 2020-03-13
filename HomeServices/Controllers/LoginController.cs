@@ -22,7 +22,7 @@ namespace HomeServices.Controllers
             if (ModelState.IsValid && TypeValue!=null)
             {         
                 if (TypeValue.ToLower() == "customer")
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Dashboard", "CustomerDashboard");
                 else if (TypeValue.ToLower() == "service provider")
                     return RedirectToAction("Index", "Home");
             }

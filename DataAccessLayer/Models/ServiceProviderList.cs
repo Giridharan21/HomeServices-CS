@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Models
 {
-    public class ServiceProviderList
+    public class ServiceProvider
     {
         public int ServiceProviderId { get; set; }
         public string ServiceProviderName { get; set; }
-        public double rating { get; set; }
-        public DateTime scheduledDate { get; set; }
+        public decimal? Rating { get; set; }
+        public DateTime ScheduledDate { get; set; }
+        public int CustomerId { get; set; }
     }
 }
