@@ -51,11 +51,13 @@
                 </td>
             </tr>
         </table>
-
+        @Html.ValidationSummary()
 
 
     }
-
+    <script>
+        @Html.Raw(ViewBag.Msg);
+    </script>
 </body>
 </html>
 

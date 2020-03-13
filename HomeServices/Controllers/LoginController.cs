@@ -18,17 +18,17 @@ namespace HomeServices.Controllers
         [HttpPost]
         public ActionResult Login(Login Model)
         {
-            if (ModelState.IsValid)
+            
+            if (ModelState.IsValid && Model!=null)
             {
-                string TypeValue = Data.Addlogin(Model);
-                if (TypeValue == "CUSTOMER")
+                UserInfoModel LoggedInUser = Data.Addlogin(Model);
+                Session["UserData"] = LoggedInUser;
+                if (LoggedInUser.Type == "CUSTOMER")
                     return RedirectToAction("Index", "Home");
-                else if (TypeValue == "SERVICE PROVIDER")
+                else if ( LoggedInUser.Type == "SERVICE PROVIDER")
                     return RedirectToAction("Action", "Home");
-
-
-                return View();
             }
+            ViewBag.Msg = "alert('Invalid User')";
             return View();
         }
 
