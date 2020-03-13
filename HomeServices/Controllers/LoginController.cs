@@ -18,15 +18,17 @@ namespace HomeServices.Controllers
         [HttpPost]
         public ActionResult Login(Login Model)
         {
-            var TypeValue = Data.Addlogin(Model);
-            if (ModelState.IsValid && TypeValue!=null)
-            {         
-                if (TypeValue.ToLower() == "customer")
+            if (ModelState.IsValid)
+            {
+                string TypeValue = Data.Addlogin(Model);
+                if (TypeValue == "CUSTOMER")
                     return RedirectToAction("Index", "Home");
-                else if (TypeValue.ToLower() == "service provider")
-                    return RedirectToAction("Index", "Home");
-            }
+                else if (TypeValue == "SERVICE PROVIDER")
+                    return RedirectToAction("Action", "Home");
 
+
+                return View();
+            }
             return View();
         }
 

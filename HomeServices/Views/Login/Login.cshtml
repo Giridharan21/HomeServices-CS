@@ -3,14 +3,60 @@
     ViewBag.Title = "Index";
     Layout = null;
 }
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url('../../Content/10.jpg');
+        }
+
+        form {
+            margin-top: 10%;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
 <body>
     @using (Html.BeginForm("Login", "Login", FormMethod.Post))
     {
-        @Html.EditorForModel()
-    <input type="Submit" value="Login"/>
-    
-    
+        <table align="center" border="1">
+            <tr>
+                <td>
+                    Username
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.UserName)
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password
+                </td>
+                <td>
+                    @Html.PasswordFor(m => m.Password)
+
+                </td>
+
+            <tr>
+                <td>
+                    <input type="Submit" width="100" value="Login" />
+                </td>
+            </tr>
+        </table>
+
+
+
     }
-        
+
 </body>
+</html>
+
 
