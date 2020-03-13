@@ -17,7 +17,7 @@ namespace DataAccessLayer
         // If you wish to target a different database and/or database provider, modify the 'ServicesContext' 
         // connection string in the application configuration file.
         public ServicesContext()
-            : base("name=ServicesContext") {
+            : base("ServicesContext") {
         }
         protected override void OnModelCreating(DbModelBuilder model) {
             model.Entity<Payment>().Property(g => g.Amount).HasPrecision(10, 2);
@@ -34,6 +34,7 @@ namespace DataAccessLayer
          public virtual DbSet<Order> Orders  { get; set; }
          public virtual DbSet<Review> Reviews  { get; set; }
          public virtual DbSet<Payment> Payments  { get; set; }
+         public virtual DbSet<BankAccountDetails> BankAccounts  { get; set; }
     }
 
     //public class MyEntity
@@ -46,6 +47,7 @@ namespace DataAccessLayer
     {
         public int Id { get; set; }
         public string BankName { get; set; }
+        public string AccountNumber { get; set; }
         public decimal Balance { get; set; }
     }
     public class User

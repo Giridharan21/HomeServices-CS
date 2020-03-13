@@ -1,12 +1,23 @@
-namespace DataAccessLayer.Migrations
+﻿namespace DataAccessLayer.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SURIYA : DbMigration
+    public partial class mig : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.BankAccountDetails",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        BankName = c.String(),
+                        AccountNumber = c.String(),
+                        Balance = c.Decimal(nullable: false, precision: 10, scale: 2),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.Orders",
                 c => new
@@ -19,8 +30,8 @@ namespace DataAccessLayer.Migrations
                         ScheduleDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.FromFK, cascadeDelete: false)
-                .ForeignKey("dbo.Users", t => t.ToFK, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.FromFK, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.ToFK, cascadeDelete: false)
                 .Index(t => t.FromFK)
                 .Index(t => t.ToFK);
             
@@ -42,16 +53,6 @@ namespace DataAccessLayer.Migrations
                 .Index(t => t.Username, unique: true)
                 .Index(t => t.Contact, unique: true)
                 .Index(t => t.BankFK);
-            
-            CreateTable(
-                "dbo.BankAccountDetails",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        BankName = c.String(),
-                        Balance = c.Decimal(nullable: false, precision: 10, scale: 2),
-                    })
-                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Payments",
@@ -98,9 +99,9 @@ namespace DataAccessLayer.Migrations
             DropIndex("dbo.Orders", new[] { "FromFK" });
             DropTable("dbo.Reviews");
             DropTable("dbo.Payments");
-            DropTable("dbo.BankAccountDetails");
             DropTable("dbo.Users");
             DropTable("dbo.Orders");
+            DropTable("dbo.BankAccountDetails");
         }
     }
 }
