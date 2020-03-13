@@ -11,7 +11,7 @@ namespace DataAccessLayer.Models
     {
 
         [Required(ErrorMessage ="UserName Should Be AlphaNumeric.")]
-        [Range(4, 8)]
+       // [Range(4, 8)]
 
         public string Username { get; set; }
         [Required(ErrorMessage = "Password is required.")]
@@ -22,7 +22,7 @@ namespace DataAccessLayer.Models
         public string ConfirmPassword { get; set; }
         [Required]
         public string Emailid { get; set; }
-        [Required]
+       
         public string Type { get; set; }
         [Required]
 

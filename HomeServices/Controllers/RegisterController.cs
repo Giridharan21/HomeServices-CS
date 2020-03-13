@@ -16,10 +16,11 @@ namespace HomeServices.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult customer(CustomerRegisterClass m)
-        {if (ModelState.IsValid)
+        public ActionResult customer(CustomerRegisterClass dad)
+        {
+            if (ModelState.IsValid)
             {
-                Data.AddUser(m);
+                Data.AddUser(dad);
                 return View();
             }
             return View();
@@ -32,10 +33,10 @@ namespace HomeServices.Controllers
            
         }
             [HttpPost]
-        public ActionResult ServiceProvider(SPRegisterClass n) {
+        public ActionResult ServiceProvider(SPRegisterClass mom) {
             if (ModelState.IsValid)
             {
-                Data.registeruser(n);
+                Data.registeruser(mom);
                 return View();
             }
             return View();

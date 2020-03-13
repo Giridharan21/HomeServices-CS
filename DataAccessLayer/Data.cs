@@ -18,57 +18,55 @@ namespace DataAccessLayer
             ServicesContext i = new ServicesContext();
             var res = (from a in i.Users where a.Username == Model.UserName &&
                        a.Password == Model.Password select a.Type).FirstOrDefault();
-
+            
             return res;
 
         }
        
 
 
-        public static void AddUser(CustomerRegisterClass m)
+        public static void AddUser(CustomerRegisterClass dad)
         {
             var s = new ServicesContext();
             BankAccountDetails b = new BankAccountDetails();
-            b.BankName = m.BankName;
-            b.AccountNumber = m.BankAccNumber;
+            b.BankName = dad.BankName;
+            b.AccountNumber = dad.BankAccNumber;
             b.Balance = 1000.00m;
             s.BankAccounts.Add(b);
             //s.SaveChanges();
             //var BankId = s.Accounts.Where(g => g.AccountNumber == m.BankAccNumber).Select(g => g.Id).FirstOrDefault();
             User a= new User();
             
-            a.Username = m.Username;
-            a.Password = m.Password;
+            a.Username = dad.Username;
+            a.Password = dad.Password;
           
-            a.Contact = m.Contact;
-            a.Location = m.Location;
+            a.Contact = dad.Contact;
+            a.Location = dad.Location;
            
             a.BankFK =b.Id;
             a.Type = "CUSTOMER";
                
             s.Users.Add(a);
             s.SaveChanges();
-
-           
            
         }
-        public static void registeruser(SPRegisterClass n)
+        public static void registeruser(SPRegisterClass mom)
         {
             var k = new ServicesContext();
             BankAccountDetails c = new BankAccountDetails();
-            c.BankName = n.BankName;
-            c.AccountNumber = n.BankAccNumber;
+            c.BankName = mom.BankName;
+            c.AccountNumber = mom.BankAccNumber;
             c.Balance = 1000.00m;
             k.BankAccounts.Add(c);
             //s.SaveChanges();
             //var BankId = s.Accounts.Where(g => g.AccountNumber == m.BankAccNumber).Select(g => g.Id).FirstOrDefault();
             User d = new User();
 
-            d.Username = n.Username;
-            d.Password = n.Password;
-            d.Service = n.Service;
+            d.Username = mom.Username;
+            d.Password = mom.Password;
+            d.Service = mom.Service;
          
-            d.Contact = n.Contact;
+            d.Contact = mom.Contact;
             
             d.BankFK = c.Id;
             d.Type = "SERVICE PROVIDER";
