@@ -19,7 +19,7 @@ namespace HomeServices.Controllers
         public ActionResult customer(CustomerRegisterClass m)
         {if (ModelState.IsValid)
             {
-                Data.adduser(m);
+                Data.Adduser(m);
                 return View();
             }
             return View();

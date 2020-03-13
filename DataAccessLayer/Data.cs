@@ -16,14 +16,14 @@ namespace DataAccessLayer
 {
     public static class Data
     {
-        public static void adduser(CustomerRegisterClass m)
+        public static void AddUser(CustomerRegisterClass m)
         {
             var s = new ServicesContext();
             BankAccountDetails b = new BankAccountDetails();
             b.BankName = m.BankName;
             b.AccountNumber = m.BankAccNumber;
             b.Balance = 1000.00m;
-            s.Accounts.Add(b);
+            s.BankAccounts.Add(b);
             //s.SaveChanges();
             //var BankId = s.Accounts.Where(g => g.AccountNumber == m.BankAccNumber).Select(g => g.Id).FirstOrDefault();
             User a= new User();
@@ -50,7 +50,7 @@ namespace DataAccessLayer
             c.BankName = n.BankName;
             c.AccountNumber = n.BankAccNumber;
             c.Balance = 1000.00m;
-            k.Accounts.Add(c);
+            k.BankAccounts.Add(c);
             //s.SaveChanges();
             //var BankId = s.Accounts.Where(g => g.AccountNumber == m.BankAccNumber).Select(g => g.Id).FirstOrDefault();
             User d = new User();

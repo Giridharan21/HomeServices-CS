@@ -130,7 +130,6 @@
     <Compile Include="Controllers\DesignController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
-
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -177,7 +176,6 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\customer.cshtml" />
     <Content Include="Views\Register\ServiceProvider.cshtml" />
-
     <Content Include="Views\Payment\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
