@@ -8,14 +8,23 @@ using DataAccessLayer.Models;
 using DataAccessLayer;
 
 
-
-
-
-
 namespace DataAccessLayer
 {
     public static class Data
     {
+
+      public static string Addlogin(Login Model)
+        {
+            ServicesContext i = new ServicesContext();
+            var res = (from a in i.Users where a.Username == Model.UserName &&
+                       a.Password == Model.Password select a.Type).FirstOrDefault();
+
+            return res;
+
+        }
+       }
+
+
         public static void AddUser(CustomerRegisterClass m)
         {
             var s = new ServicesContext();
@@ -71,5 +80,6 @@ namespace DataAccessLayer
 
         }
 
-    }
+
+    
 }
