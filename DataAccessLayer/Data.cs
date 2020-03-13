@@ -22,7 +22,7 @@ namespace DataAccessLayer
             return res;
 
         }
-       }
+       
 
 
         public static void AddUser(CustomerRegisterClass m)
@@ -81,5 +81,5 @@ namespace DataAccessLayer
         }
 
 
-    
+    }    
 }
