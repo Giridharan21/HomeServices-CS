@@ -1,7 +1,22 @@
-﻿
-@{
+﻿@{
+    Layout = null;
     ViewBag.Title = "Index";
 }
+<html>
+<head>
+    <link href="~/Content/Common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header>
+        @{ Html.RenderAction("Header", "Design"); }
+    </header>
+    <article>
+        content
+    </article>
+    <footer>
+        @{ Html.RenderAction("Footer", "Design"); }
+    </footer>
+</body>
+</html>
 
-<h2>Customer</h2>
 

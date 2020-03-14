@@ -24,9 +24,9 @@ namespace HomeServices.Controllers
                 UserInfoModel LoggedInUser = Data.Addlogin(Model);
                 Session["UserData"] = LoggedInUser;
                 if (LoggedInUser.Type == "CUSTOMER")
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Dashboard", "CustomerDashboard");
                 else if ( LoggedInUser.Type == "SERVICE PROVIDER")
-                    return RedirectToAction("Action", "Home");
+                    return RedirectToAction("Dashboard", "ServiceProvider");
             }
             ViewBag.Msg = "alert('Invalid User')";
             return View();
