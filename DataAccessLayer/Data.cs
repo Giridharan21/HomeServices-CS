@@ -7,9 +7,6 @@ using System.Web.Mvc;
 using DataAccessLayer.Models;
 using DataAccessLayer;
 
-using System.Web.Mvc;
-using DataAccessLayer.Models;
-using DataAccessLayer;
 namespace DataAccessLayer
 {
     public static class Data
@@ -235,9 +232,7 @@ namespace DataAccessLayer
             }
             return UserDataList;
         }  
-    }   
-    
-}
+ 
         public static void PlaceOrder(int ServiceProviderId,DateTime ScheduleDate)
         {
             ServicesContext ContextObj = new ServicesContext();
