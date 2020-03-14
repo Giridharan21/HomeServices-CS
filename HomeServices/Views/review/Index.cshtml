@@ -1,0 +1,22 @@
+﻿@model DataAccessLayer.Models.reviewmodel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2><u>REVIEWS</u></h2><br />
+<body>
+    @using (Html.BeginForm("Index", "review", FormMethod.Post))
+    {
+        <span><b><h4>RATINGS</h4></b></span>
+        @Html.TextBoxFor(m => m.Stars)
+        @Html.ValidationMessageFor(m => m.Stars)<br /><br />
+        <span><b><h4>COMMENTS</h4></b></span>
+        @Html.TextAreaFor(m => m.Comment)<BR /><br />
+        @Html.ValidationMessageFor(m => m.Comment)<br />
+        <input type="submit" value="submit" />
+
+    }
+</body>
+
+
+

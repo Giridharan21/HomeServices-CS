@@ -164,7 +164,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ListOrder.cs" />
-
     <Compile Include="Models\OrderData.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\ServiceProviderList.cs" />
@@ -173,8 +172,17 @@
     <Compile Include="Models\SPRegisterClass.cs" />
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\UserInfoMode.cs" />
+    <Compile Include="Models\reviewmodel.cs" />
+    <Compile Include="Models\Data.cs" />
+    <Compile Include="Migrations\202003110513286_SURIYA.cs" />
+    <Compile Include="Migrations\202003110513286_SURIYA.Designer.cs">
+      <DependentUpon>202003110513286_SURIYA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="m\stars.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServicesContext.cs" />
+    <Compile Include="Models\ServicesContext.cs" />
+    <Compile Include="r\Stars.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
