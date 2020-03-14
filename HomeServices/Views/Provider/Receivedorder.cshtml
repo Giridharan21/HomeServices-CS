@@ -23,13 +23,13 @@
                     Status
                 </td>
                 <td>
-                    Status
-                </td>
-                <td>
                     Date
                 </td>
                 <td>
                     Shedule Date
+                </td>
+                <td>
+                    Action
                 </td>
             </tr>
             @foreach (var r in Model)
@@ -50,34 +50,34 @@
                 <td>
                     @r.ScheduleDate
                 </td>
+
                 <td>
                     @if (r.Status == "Active")
                     {
-                        using (Html.BeginForm("Receivedorder", "Provider",FormMethod.Post))
+                        using (Html.BeginForm("PlaceOrder", "Provider", FormMethod.Post))
                         {
                             @Html.Hidden("OrderId", r.Id)
                             @Html.Hidden("Status", "Accepted")
                             <input type="submit" value="Accept" />
                         }
 
-                        using (Html.BeginForm("Receivedorder", "Provider",FormMethod.Post))
+                        using (Html.BeginForm("PlaceOrder", "Provider", FormMethod.Post))
                         {
                             @Html.Hidden("OrderId", r.Id)
                             @Html.Hidden("Status", "Declined")
-                            <input type="submit" value="Accept" />
+                            <input type="submit" value="Decline" />
+                        }
+
+                    }  @if (r.Status == "Accepted")
+                    {
+                        using (Html.BeginForm("PlaceOrder", "Provider", FormMethod.Post))
+                        {
+                            @Html.Hidden("OrderId", r.Id)
+                            @Html.Hidden("Status", "Served")
+                            <input type="submit" value="Served" />
                         }
                     }
                 </td>
-                <td>
-                    @if (r.Status == "Accepted")
-                    {
-                        using (Html.BeginForm("Receivedorder", "Provider",FormMethod.Post))
-                        {
-                            @Html.Hidden("OrderId", r.Id)
-                            @Html.Hidden("Status", "Completed")
-                            <input type="submit" value="Complete" />
-                        }}
-                        </td>
                 </tr>
             }
         </table>}

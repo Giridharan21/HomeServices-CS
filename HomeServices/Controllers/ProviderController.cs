@@ -15,23 +15,24 @@ namespace HomeServices.Controllers
         {
             return View();
         }
-        public ActionResult Receivedorder()
+        public ActionResult ReceivedOrder()
         {
-
-            var res = Data.ServiceProvider();
+            var User = (UserInfoModel)Session["UserData"];
+            var res = Data.ServiceProvider(User.Id);
             return View(res);
         }
 
         [HttpPost]
-        public ActionResult Receivedorder(int OrderId, string Status)
+        public ActionResult PlaceOrder(int OrderId, string Status)
         {
             Data.Accept(OrderId, Status);
-            return View();
+            return Redirect("~/Provider/ReceivedOrder/");
         }
 
         public ActionResult Previousorder()
         {
-            var res = Data.ServiceProvider();
+            var User = (UserInfoModel)Session["UserData"];
+            var res = Data.ServiceProvider(User.Id);
             return View(res);
 
         }

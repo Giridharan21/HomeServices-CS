@@ -11,11 +11,12 @@ namespace DataAccessLayer
 {
     public static class Data
     {
-        public static List<ListOrder> ServiceProvider()
+        public static List<ListOrder> ServiceProvider(int Id)
         {
             List<ListOrder> l = new List<ListOrder>();
             ServicesContext db = new ServicesContext();
             var res = from a in db.Orders
+                      where Id==a.ToFK
                       select a;
             foreach (var b in res)
             {
@@ -39,7 +40,6 @@ namespace DataAccessLayer
                        select a).FirstOrDefault();
 
             res.Status = status;
-            db.Orders.Add(res);
             db.SaveChanges();
 
 

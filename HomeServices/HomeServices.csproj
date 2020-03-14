@@ -270,7 +270,7 @@
     <Content Include="Views\review\Index.cshtml" />
     <Content Include="Views\Provider\Index.cshtml" />
     <Content Include="Views\Provider\Dashboard.cshtml" />
-    <Content Include="Views\Provider\Receivedorder.cshtml" />
+    <Content Include="Views\Provider\ReceivedOrder.cshtml" />
     <Content Include="Views\Provider\Previousorder.cshtml" />
   </ItemGroup>
   <ItemGroup>

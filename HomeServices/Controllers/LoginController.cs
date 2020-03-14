@@ -26,7 +26,7 @@ namespace HomeServices.Controllers
                 if (LoggedInUser.Type == "CUSTOMER")
                     return RedirectToAction("Dashboard", "CustomerDashboard");
                 else if ( LoggedInUser.Type == "SERVICE PROVIDER")
-                    return RedirectToAction("Dashboard", "ServiceProvider");
+                    return RedirectToAction("Dashboard", "Provider");
             }
             ViewBag.Msg = "alert('Invalid User')";
             return View();
