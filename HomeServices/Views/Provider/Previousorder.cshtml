@@ -1,0 +1,57 @@
+﻿@model List<DataAccessLayer.Models.ListOrder>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Received Orders</title>
+</head>
+<body>
+    @using (Html.BeginForm("ro", "sp", FormMethod.Post))
+    {
+        <table border="1">
+            <tr>
+                <td>
+                    ID
+                </td>
+                <td>
+                    Customer
+                </td>
+                <td>
+                    Status
+                </td>
+                <td>
+                    Status
+                </td>
+                <td>
+                    Date
+                </td>
+                <td>
+                    Shedule Date
+                </td>
+            </tr>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>
+                        @r.Id
+                    </td>
+                    <td>
+                        @r.FromFK
+                    </td>
+                    <td>
+                        @r.Status
+                    </td>
+                    <td>
+                        @r.Date
+                    </td>
+                    <td>
+                        @r.ScheduleDate
+                    </td>
+                </tr>
+            }
+        </table>}
+</body>
+</html>

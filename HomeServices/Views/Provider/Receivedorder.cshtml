@@ -1,0 +1,85 @@
+﻿@model List<DataAccessLayer.Models.ListOrder>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Received Orders</title>
+</head>
+<body>
+    @using (Html.BeginForm("Rececivedorder", "Provider", FormMethod.Post))
+    {
+        <table border="1">
+            <tr>
+                <td>
+                    ID
+                </td>
+                <td>
+                    Customer
+                </td>
+                <td>
+                    Status
+                </td>
+                <td>
+                    Status
+                </td>
+                <td>
+                    Date
+                </td>
+                <td>
+                    Shedule Date
+                </td>
+            </tr>
+            @foreach (var r in Model)
+            {
+            <tr>
+                <td>
+                    @r.Id
+                </td>
+                <td>
+                    @r.FromFK
+                </td>
+                <td>
+                    @r.Status
+                </td>
+                <td>
+                    @r.Date
+                </td>
+                <td>
+                    @r.ScheduleDate
+                </td>
+                <td>
+                    @if (r.Status == "Active")
+                    {
+                        using (Html.BeginForm("Receivedorder", "Provider",FormMethod.Post))
+                        {
+                            @Html.Hidden("OrderId", r.Id)
+                            @Html.Hidden("Status", "Accepted")
+                            <input type="submit" value="Accept" />
+                        }
+
+                        using (Html.BeginForm("Receivedorder", "Provider",FormMethod.Post))
+                        {
+                            @Html.Hidden("OrderId", r.Id)
+                            @Html.Hidden("Status", "Declined")
+                            <input type="submit" value="Accept" />
+                        }
+                    }
+                </td>
+                <td>
+                    @if (r.Status == "Accepted")
+                    {
+                        using (Html.BeginForm("Receivedorder", "Provider",FormMethod.Post))
+                        {
+                            @Html.Hidden("OrderId", r.Id)
+                            @Html.Hidden("Status", "Completed")
+                            <input type="submit" value="Complete" />
+                        }}
+                        </td>
+                </tr>
+            }
+        </table>}
+</body>
+</html>
