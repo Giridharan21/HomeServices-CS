@@ -1,0 +1,32 @@
+﻿@model DataAccessLayer.Models.SPRegisterClass
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "ServiceProvider";
+}
+@using (Html.BeginForm("ServiceProvider", "Register", FormMethod.Post))
+{ 
+
+    <span>UserName:</span>@Html.TextBoxFor(g => g.Username);<br />
+    <span>Password:</span>@Html.PasswordFor(g => g.Password);<br />
+    <span>ConfirmPassword:</span>@Html.PasswordFor(g => g.ConfirmPassword);<br />
+
+    <span>EmailId:</span>@Html.TextBoxFor(g => g.Emailid);<br />
+
+    <span>ContactNumber:</span>@Html.TextBoxFor(g => g.Contact);<br />
+
+    <span>Service:</span>@Html.TextBoxFor(g => g.Service);<br />
+
+
+    <span>BankName:</span>@Html.TextBoxFor(g => g.BankName);<br />
+
+    <span>BankAccount Number:</span>@Html.TextBoxFor(g => g.BankAccNumber);<br />
+
+
+    <input type="submit" value="Register" />
+    @Html.ValidationSummary()
+}
+
+
