@@ -164,7 +164,7 @@
     <Compile Include="Models\ListOrder.cs" />
     <Compile Include="Models\OrderData.cs" />
     <Compile Include="Models\Profile.cs" />
-    <Compile Include="Models\ServiceProviderList.cs" />
+    <Compile Include="Models\ServiceProviderModel.cs" />
     <Compile Include="Models\CustomerRegisterClass.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\SPRegisterClass.cs" />

@@ -1,4 +1,4 @@
-﻿@model List<DataAccessLayer.Models.ServiceProvider>
+﻿@model List<DataAccessLayer.Models.ServiceProviderModel>
 @{
     Layout = null;
 }
@@ -31,25 +31,39 @@
         </tr>
         @foreach (var i in Model)
         {
-            <tr>
+        <tr>
+            <td>
+                @i.ServiceProviderId
+            </td>
+            <td>
+                @i.ServiceProviderName
+            </td>
+            <td>
+                @i.Rating
+            </td>
+            @using (Html.BeginForm("PlaceOrder", "CustomerDashboard", FormMethod.Post))
+            {
                 <td>
-                    @i.ServiceProviderId
+                    <input type="datetime-local" name="ScheduledDate" />
                 </td>
                 <td>
-                    @i.ServiceProviderName
+                    <input type="hidden" name ="CustomerId" value=@i.CustomerId />
+                    <input type="hidden" name="ServiceProviderId" value=@i.ServiceProviderId />
+
+                    <input type="submit" value="Place Order" />
                 </td>
-                <td>
-                    @i.Rating
-                </td>
-                @*@using (Html.BeginForm("PlaceOrder","CustomerDashboard",FormMethod.Post))
-                {
-                    <td><input type="datetime-local" name="ScheduleDate" /></td>
-                    <td><input type="hidden" name="ServiceProviderId" value="@i.ServiceProviderId" /></td>
-                    <td><input type="submit" value="Place Order" /></td>
-                    
-                }*@
-                
-            </tr>
+
+            }
+
+            @*@using (Html.BeginForm("PlaceOrder","CustomerDashboard",FormMethod.Post))
+        {
+            <td><input type="datetime-local" name="ScheduleDate" /></td>
+            <td><input type="hidden" name="ServiceProviderId" value="@i.ServiceProviderId" /></td>
+            <td><input type="submit" value="Place Order" /></td>
+
+        }*@
+
+        </tr>
         }
     </table>
 </body>

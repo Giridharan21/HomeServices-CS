@@ -103,21 +103,21 @@ namespace DataAccessLayer
 
             return TypeService;
         }
-        public static List<ServiceProvider> SPList(string service)
+        public static List<ServiceProviderModel> SPList(string service,int Id)
         {
             ServicesContext SerObj = new ServicesContext();
-            List<ServiceProvider> SPList = new List<ServiceProvider>();
+            List<ServiceProviderModel> SPList = new List<ServiceProviderModel>();
             var SPResult = from a in SerObj.Users
                       where a.Service == service
                       select a;
             
             foreach(var rec in SPResult)
             {
-                ServiceProvider ServiceObj = new ServiceProvider();
+                var ServiceObj = new ServiceProviderModel();
                 ServiceObj.ServiceProviderId = rec.Id;
                 ServiceObj.ServiceProviderName = rec.Username;
                 ServiceObj.Rating = Data.average(rec.Id);
-                //s.CustomerId = (LoginUserInfo)Session["UserData"];
+                ServiceObj.CustomerId = Id;
                 SPList.Add(ServiceObj);
                
             }
@@ -241,7 +241,7 @@ namespace DataAccessLayer
             ContextObj.SaveChanges();
             
         }
-        public static void PlaceOrder(ServiceProvider NewOrder)
+        public static void PlaceOrder(ServiceProviderModel NewOrder)
         {
             ServicesContext ContextObj = new ServicesContext();
             Order orderObj = new Order() { Date = DateTime.Now, ScheduleDate = NewOrder.ScheduledDate, FromFK = NewOrder.CustomerId, Status = "Active", ToFK = NewOrder.ServiceProviderId };
