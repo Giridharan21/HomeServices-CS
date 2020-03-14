@@ -1,0 +1,56 @@
+﻿@model List<DataAccessLayer.Models.ServiceProvider>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ServiceProvider</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>
+                SP ID
+            </th>
+            <th>
+                SP Name
+            </th>
+            <th>
+                Rating
+            </th>
+            <th>
+                Schedule Date
+            </th>
+            <th colspan="2">
+                Action
+            </th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>
+                    @i.ServiceProviderId
+                </td>
+                <td>
+                    @i.ServiceProviderName
+                </td>
+                <td>
+                    @i.Rating
+                </td>
+                @*@using (Html.BeginForm("PlaceOrder","CustomerDashboard",FormMethod.Post))
+                {
+                    <td><input type="datetime-local" name="ScheduleDate" /></td>
+                    <td><input type="hidden" name="ServiceProviderId" value="@i.ServiceProviderId" /></td>
+                    <td><input type="submit" value="Place Order" /></td>
+                    
+                }*@
+                
+            </tr>
+        }
+    </table>
+</body>
+</html>
