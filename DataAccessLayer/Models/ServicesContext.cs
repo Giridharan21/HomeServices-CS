@@ -23,6 +23,7 @@ namespace DataAccessLayer
             model.Entity<Payment>().Property(g => g.Amount).HasPrecision(10, 2);
             model.Entity<Review>().Property(g => g.Stars).HasPrecision(2, 1);
             model.Entity<BankAccountDetails>().Property(g => g.Balance).HasPrecision(10, 2);
+            model.Entity<ServiceProviderDetails>().Property(g => g.Charge).HasPrecision(7, 2);
         }
        
 
@@ -117,6 +118,7 @@ namespace DataAccessLayer
         [ForeignKey("BankAccount")]
         [Index(IsUnique = true)]
         public int BankFK { get; set; }
+        public decimal Charge { get; set; }
 
         public BankAccountDetails BankAccount { get; set; }
         public User User { get; set; }

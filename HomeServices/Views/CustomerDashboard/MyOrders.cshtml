@@ -102,7 +102,7 @@
         </table>
     }<br />
     <br />
-    <h3>Accepted Orders</h3>
+    <h3>Accepted Orders and Server Orders</h3>
     <table border="1">
         <tr>
             <td>
@@ -129,7 +129,7 @@
         </tr>
         @foreach (var i in Model)
         {
-            if (i.status == "Accepted")
+            if (i.status == "Accepted" || i.status == "Served")
             {
                 <tr>
                     <td>
@@ -157,6 +157,16 @@
                             <input type="hidden" name="ServiceProviderId" value="Cancel" />
 
                             <input type="submit" value="Cancel" />
+                        }
+                    </td>
+                    <td>
+                        @if (i.status == "Served") {
+                            using (Html.BeginForm("Pay", "Payment", FormMethod.Post)) {
+                                <input type="hidden" name="CustomerId" value=@i.id />
+                                <input type="hidden" name="ServiceProviderId" value="Cancel" />
+
+                                <input type="submit" value="Pay" />
+                            }
                         }
                     </td>
                 </tr>

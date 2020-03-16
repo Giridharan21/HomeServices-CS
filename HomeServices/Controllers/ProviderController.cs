@@ -25,7 +25,7 @@ namespace HomeServices.Controllers
         [HttpPost]
         public ActionResult ReceivedOrder(int OrderId, string Status)
         {
-            Data.Accept(OrderId, Status);
+            Data.ChangeStatus(OrderId, Status);
             return Redirect("~/Provider/ReceivedOrder/");
         }
 

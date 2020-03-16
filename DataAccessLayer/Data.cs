@@ -13,26 +13,29 @@ namespace DataAccessLayer
     {
         public static List<ListOrder> ServiceProvider(int Id)
         {
-            List<ListOrder> l = new List<ListOrder>();
+            List<ListOrder> listOrders = new List<ListOrder>();
             ServicesContext db = new ServicesContext();
+            var SPId = db.ServiceProviders.Where(g => g.UserId == Id).Select(g => g.Id).FirstOrDefault();
             var res = from a in db.Orders
-                      where Id==a.ToFK
+                      where SPId==a.ToFK
                       select a;
+
             foreach (var b in res)
             {
 
-                ListOrder o = new ListOrder();
-                o.Id = b.Id;
-                o.FromFK = b.FromFK;
-                o.Status = b.Status;
-                o.Date = b.Date;
-                o.ScheduleDate = b.ScheduleDate;
-                l.Add(o);
+                ListOrder OrderObj = new ListOrder {
+                    Id = b.Id,
+                    FromFK = b.FromFK,
+                    Status = b.Status,
+                    Date = b.Date,
+                    ScheduleDate = b.ScheduleDate
+                };
+                listOrders.Add(OrderObj);
             }
-            return l;
+            return listOrders;
 
         }
-        public static void Accept(int orderId, string status)
+        public static void ChangeStatus(int orderId, string status)
         {
             ServicesContext db = new ServicesContext();
             var res = (from a in db.Orders
@@ -40,8 +43,6 @@ namespace DataAccessLayer
                        select a).FirstOrDefault();
 
             res.Status = status;
-
-            db.Orders.Add(res);
             db.SaveChanges();
         }
         public static List<ListOrder> PreviousOrder(int orderId)
@@ -50,6 +51,7 @@ namespace DataAccessLayer
             ServicesContext db = new ServicesContext();
             var res = from d in db.Orders
                       where d.Id == orderId
+                      select d;
             foreach (var b in res)
             {
 
@@ -293,7 +295,6 @@ namespace DataAccessLayer
                       where id == a.Id
                       select a).FirstOrDefault();
             obj.Users.Remove(res);
-        }
         }    
         //Admin Functions
         public static void AddService(string ServiceString) {

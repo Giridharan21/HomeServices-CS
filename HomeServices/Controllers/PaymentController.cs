@@ -10,12 +10,12 @@ namespace HomeServices.Controllers
     {
         //Payment Giri
         [HttpGet]
-        public ActionResult Payment(PaymentModel PayObj)
+        public ActionResult Pay(PaymentModel PayObj)
         {
             return View(PayObj);
         }
         [HttpPost]
-        public ActionResult Payment(string Password)
+        public ActionResult Pay(string Password)
         {
 
             return View();
