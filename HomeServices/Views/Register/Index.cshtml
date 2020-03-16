@@ -9,24 +9,24 @@
 @using (Html.BeginForm("Index", "Register", FormMethod.Post))
 {
 
-    <span>UserName:</span>@Html.TextBoxFor(g => g.Username);<br />
-    <span>Password:</span>@Html.Password("pass");<br />
-    <span>ConfirmPassword:</span>@Html.Password("pass");<br />
-    <span>Type:</span>@Html.DropDownListFor(g => g.TypeVal, Model.Type, " ");<br />
-    <span>EmailId:</span>@Html.TextBoxFor(g => g.Emailid);<br />
+<span>UserName:</span>@Html.TextBoxFor(g => g.Username);<br />
+<span>Password:</span>@Html.Password("pass");<br />
+<span>ContactNumber:</span>@Html.TextBoxFor(g => g.Contact);<br />
 
-    <span>ContactNumber:</span>@Html.TextBoxFor(g => g.Contact);<br />
-
-    <span>Location:</span>@Html.TextBoxFor(g => g.Location);<br />
-
-    
-
-    <span>BankName:</span>@Html.TextBoxFor(g => g.BankName);<br />
-
-    <span>BankAccount Number:</span>@Html.TextBoxFor(g => g.BankAccNumber);<br />
+<span>Location:</span>@Html.TextBoxFor(g => g.Location);<br />
 
 
-    <input type="submit" value="Register" />
+<span>ConfirmPassword:</span>@Html.Password("pass");<br />
+<span>Type:</span>@Html.DropDownListFor(g => g.TypeVal, Model.Type, " ");<br />
+<span>EmailId:</span>@Html.TextBoxFor(g => g.Emailid);<br />
+
+
+<span>BankName:</span>@Html.TextBoxFor(g => g.BankName);<br />
+
+<span>BankAccount Number:</span>@Html.TextBoxFor(g => g.BankAccNumber);<br />
+
+
+<input type="submit" value="Register" />
 }
 
 

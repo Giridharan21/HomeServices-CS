@@ -10,40 +10,55 @@ namespace DataAccessLayer.Models
     public class CustomerRegisterClass
     {
 
+        
+
         [MinLength(4, ErrorMessage = "Minimum Length is 4")]
         [MaxLength(16, ErrorMessage = "Maximum Length is 16")]
-        [Required(ErrorMessage = "It is Required")]
-        [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "UserName Should Be AlphaNumeric.")]
-
-   
-
+        [Required(ErrorMessage = "UserName is Required")]
+        [RegularExpression(@"^[a-zA-Z]{1,16}[0-9]*$", ErrorMessage = "UserName Should Be AlphaNumeric.")]
         public string Username { get; set; }
-        [Required(ErrorMessage = "Password is required.")]
 
+
+        [Required(ErrorMessage = "Password is required.")]
         public string Password { get; set; }
+
         [Required(ErrorMessage = "Confirmation Password is required.")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
         public string ConfirmPassword { get; set; }
-        [Required]
-        public string Emailid { get; set; }
-       
-        public string Type { get; set; }
-        [Required]
 
+        [Required(ErrorMessage = "Email is Required")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        public string Emailid { get; set; }
+
+        public string Type { get; set; }
+
+        [Required(ErrorMessage = "Contact is Required")]
+        [MinLength(10, ErrorMessage = "Minimum Length is 10")]
+        [MaxLength(10, ErrorMessage = "Maximum Length is 10")]
         public string Contact { get; set; }
-        [Required]
+
+
+        [Required(ErrorMessage = "Location is Required")]
         public string Location { get; set; }
-       [Required]
+
+        [Required(ErrorMessage = "BankName is Required")]
         public string BankName { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Bank Account Number is Required")]
+        [MinLength(12, ErrorMessage = "Minimum Length is 12")]
+        [MaxLength(12, ErrorMessage = "Maximum Length is 12")]
         public string BankAccNumber { get; set; }
 
-       // public SelectList Type { get; set; }
-        
+
+
+
 
     }
 
-
+}
 
     
-}
+
+
+
