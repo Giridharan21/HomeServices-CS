@@ -198,7 +198,7 @@
     <Compile Include="Controllers\CustomerDashboardController.cs" />
     <Compile Include="Controllers\DesignController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ServiceProvider.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\reviewController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -250,9 +250,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Design\Header.cshtml" />
     <Content Include="Views\Design\Footer.cshtml" />
-    <Content Include="Views\ServiceProvider\DashBoard.cshtml" />
-    <Content Include="Views\ServiceProvider\ReceivedOrder.cshtml" />
-    <Content Include="Views\ServiceProvider\PreviousOrder.cshtml" />
     <Content Include="Views\review\Index.cshtml" />
     <Content Include="Views\CustomerDashboard\Dashboard.cshtml" />
     <Content Include="Views\CustomerDashboard\MyOrders.cshtml" />
@@ -266,6 +263,14 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\review\Index.cshtml" />
+    <Content Include="Views\Provider\Index.cshtml" />
+    <Content Include="Views\Provider\Dashboard.cshtml" />
+    <Content Include="Views\Provider\ReceivedOrder.cshtml" />
+    <Content Include="Views\Provider\Previousorder.cshtml" />
+    <!--<Content Include="Views\Admin\Dashboard.cshtml" />
+    <Content Include="Views\Admin\AddorRemoveServices.cshtml" />
+    <Content Include="Views\Admin\RemoveInvalidUsers.cshtml" />
+-->
     <Content Include="Views\Admin\AddService.cshtml" />
     <Content Include="Views\Admin\RemoveService.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />

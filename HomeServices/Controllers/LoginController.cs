@@ -19,7 +19,6 @@ namespace HomeServices.Controllers
         [HttpPost]
         public ActionResult Login(Login Model)
         {
-            
             if (ModelState.IsValid && Model!=null)
             {
                 if (Model.UserName=="admin"&&Model.Password=="admin123") {

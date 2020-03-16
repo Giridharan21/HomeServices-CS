@@ -7,17 +7,17 @@ using System.Web.Mvc;
 using DataAccessLayer.Models;
 using DataAccessLayer;
 using System.Data.Linq;
-
 namespace DataAccessLayer
 {
     public static class Data
     {
-        //Jayaseelan
-        public static List<ListOrder> ServiceProvider()
+        public static List<ListOrder> ServiceProvider(int Id)
         {
             List<ListOrder> l = new List<ListOrder>();
             ServicesContext db = new ServicesContext();
-            var res = from a in db.Orders select a;
+            var res = from a in db.Orders
+                      where Id==a.ToFK
+                      select a;
             foreach (var b in res)
             {
 
@@ -40,17 +40,16 @@ namespace DataAccessLayer
                        select a).FirstOrDefault();
 
             res.Status = status;
+
             db.Orders.Add(res);
             db.SaveChanges();
-
-
         }
-        public static List<ListOrder> PreviousOrder()
+        public static List<ListOrder> PreviousOrder(int orderId)
         {
             List<ListOrder> a = new List<ListOrder>();
             ServicesContext db = new ServicesContext();
             var res = from d in db.Orders
-                      select d;
+                      where d.Id == orderId
             foreach (var b in res)
             {
 
@@ -78,6 +77,7 @@ namespace DataAccessLayer
             var Result = from a in ServiceObj.Orders
                       where a.FromFK==CustomerId
                       select a;
+
             foreach(var i in Result)
             {
                 OrderData OrderObj = new OrderData();
@@ -88,21 +88,20 @@ namespace DataAccessLayer
                 OrderObj.scheduleddate = i.ScheduleDate;
                 OrderObj.status = i.Status;
                 OrderDataList.Add(OrderObj);
-
             }
             return OrderDataList;
         }
         public static List<string> ServiceList()
         {
             ServicesContext SerObj = new ServicesContext();
-            List<string> TypeService = new List<string>();
+            List<string> ServiceTypes = new List<string>();
             var result = SerObj.Services.Select(i => i.Service);
             foreach (var i in result)
             {
-                TypeService.Add(i);
+                ServiceTypes.Add(i);
             }
 
-            return TypeService;
+            return ServiceTypes;
         }
         public static List<ServiceProviderModel> SPList(string service,int Id)
         {
@@ -124,7 +123,6 @@ namespace DataAccessLayer
                 ServiceObj.Rating = Data.Average(i.ServiceProviderFK);
                 ServiceObj.CustomerId = Id;
                 SPList.Add(ServiceObj);
-               
             }
             return SPList;
         }
@@ -138,8 +136,6 @@ namespace DataAccessLayer
                 return average;
             }
         }
-    
-
       public static UserInfoModel Addlogin(Login Model)
         {
             using (ServicesContext i = new ServicesContext())
@@ -172,8 +168,6 @@ namespace DataAccessLayer
             }
         }
        
-
-
         public static void AddUser(CustomerRegisterClass NewCustomer)
         {
             var s = new ServicesContext();
@@ -229,9 +223,6 @@ namespace DataAccessLayer
             k.ServicesAssigned.Add(service);
 
             k.SaveChanges();
-
-
-
         }
         public static List<string> GetServices()
         {
@@ -294,6 +285,16 @@ namespace DataAccessLayer
             a.SaveChanges();
 
         }
+
+        public static void RemoveUsers(int id)
+        {
+            ServicesContext obj = new ServicesContext();
+            var res = (from a in obj.Users
+                      where id == a.Id
+                      select a).FirstOrDefault();
+            obj.Users.Remove(res);
+        }
+        }    
         //Admin Functions
         public static void AddService(string ServiceString) {
             ServicesContext context = new ServicesContext();
