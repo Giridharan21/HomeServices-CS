@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddService</title>
+</head>
+<body>
+    <h3>Add Service</h3>
+    <article>
+        @using (Html.BeginForm("AddService", "Admin", FormMethod.Post)) {
+            <span>Enter a Service Name To Add</span>
+            <br />
+            @Html.TextBox("Service", "", new { @Placeholder = "Enter a Service" })
+            <input type="submit" value="Add" />
+        }
+    </article>
+    <script>
+        @Html.Raw(ViewBag.Result);
+    </script>
+</body>
+</html>

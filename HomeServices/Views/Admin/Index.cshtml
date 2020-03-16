@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h3>Admin Page</h3>
+    <h5><a href="~/Admin/AddService">Add Service</a></h5>
+    <h5><a href="~/Admin/RemoveService">Remove Service</a></h5>
+    <script>
+        @Html.Raw(ViewBag.Result);
+    </script>
+</body>
+</html>

@@ -13,6 +13,7 @@ namespace HomeServices.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            Session["Admin"] = null;
             return View();
         }
         [HttpPost]
@@ -21,6 +22,11 @@ namespace HomeServices.Controllers
             
             if (ModelState.IsValid && Model!=null)
             {
+                if (Model.UserName=="admin"&&Model.Password=="admin123") {
+                    Session["Admin"] = "admin";
+                    return Redirect("~/Admin/Index");
+                }
+                Session["Admin"] = null;
                 UserInfoModel LoggedInUser = Data.Addlogin(Model);
                 Session["UserData"] = LoggedInUser;
                 if (LoggedInUser.Type == "CUSTOMER")

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using DataAccessLayer.Models;
 using DataAccessLayer;
+using System.Data.Linq;
 
 namespace DataAccessLayer
 {
@@ -292,6 +293,23 @@ namespace DataAccessLayer
             a.Reviews.Add(r);
             a.SaveChanges();
 
+        }
+        //Admin Functions
+        public static void AddService(string ServiceString) {
+            ServicesContext context = new ServicesContext();
+            Services NewService = new Services() { Service=ServiceString};
+            context.Services.Add(NewService);
+            context.SaveChanges();
+        }
+
+        public static int RemoveService(string ServiceString) {
+            ServicesContext context = new ServicesContext();
+            var SelectedRow = context.Services.Where(g => g.Service == ServiceString).Select(g => g).FirstOrDefault();
+            if (SelectedRow is null)
+                return 0;
+            context.Services.Remove(SelectedRow);
+            context.SaveChanges();
+            return 1;
         }
     }    
 }
