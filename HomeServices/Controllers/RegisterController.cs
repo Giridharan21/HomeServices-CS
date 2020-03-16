@@ -21,25 +21,29 @@ namespace HomeServices.Controllers
             if (ModelState.IsValid)
             {
                 Data.AddUser(dad);
-                return View();
+                return Redirect("~/Login/Login");
             }
             return View();
         }
         
 
-   public ActionResult ServiceProvider()
+        public ActionResult ServiceProvider()
         {
-             return View();
+            SPRegisterClass NewRegister = new SPRegisterClass();
+            NewRegister.ServiceList = Data.GetServices();
+            return View(NewRegister);
            
         }
-            [HttpPost]
+        [HttpPost]
         public ActionResult ServiceProvider(SPRegisterClass mom) {
+            SPRegisterClass NewRegister = new SPRegisterClass();
+            NewRegister.ServiceList = Data.GetServices();
             if (ModelState.IsValid)
             {
                 Data.registeruser(mom);
-                return View();
+                return Redirect("~/Login/Login");
             }
-            return View();
+            return View(NewRegister);
         }
 
 

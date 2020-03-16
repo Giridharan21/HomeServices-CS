@@ -52,7 +52,7 @@ namespace DataAccessLayer.Models
         public string BankAccNumber { get; set; }
 
        
-     
+        public List<string> ServiceList { get;set; }
 
     }
 

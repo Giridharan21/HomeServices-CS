@@ -17,7 +17,7 @@
 
     <span>ContactNumber:</span>@Html.TextBoxFor(g => g.Contact);<br />
 
-    <span>Service:</span>@Html.TextBoxFor(g => g.Service);<br />
+    <span>Service:</span>@Html.DropDownListFor(g => g.Service,new SelectList(Model.ServiceList));<br />
 
 
     <span>BankName:</span>@Html.TextBoxFor(g => g.BankName);<br />

@@ -31,24 +31,44 @@ namespace DataAccessLayer
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
          public virtual DbSet<User>Users  { get; set; }
+         public virtual DbSet<CustomerDetails>Customers  { get; set; }
+         public virtual DbSet<ServiceProviderDetails>ServiceProviders  { get; set; }
          public virtual DbSet<Order> Orders  { get; set; }
          public virtual DbSet<Review> Reviews  { get; set; }
          public virtual DbSet<Payment> Payments  { get; set; }
          public virtual DbSet<BankAccountDetails> BankAccounts  { get; set; }
+         public virtual DbSet<Services> Services  { get; set; }
+         public virtual DbSet<ServicesAssigned> ServicesAssigned { get; set; }
     }
-
-    //public class MyEntity
-    //{
-    //    public int Id { get; set; }
-    //    public string Name { get; set; }
-    //}
 
     public class BankAccountDetails
     {
+        [Key]
         public int Id { get; set; }
         public string BankName { get; set; }
+        [Index(IsUnique =true)]
         public string AccountNumber { get; set; }
         public decimal Balance { get; set; }
+    }
+    public class Services
+    {
+        public int Id { get; set; }
+        [Required]
+        [Index(IsUnique =true)]
+        public string Service { get; set; }
+    }
+    public class ServicesAssigned
+    {
+        public int Id { get; set; }
+        [ForeignKey("SP")]
+        [Required]
+        public int ServiceProviderFK { get; set; }
+        [Required]
+        [ForeignKey("Service")]
+        public int ServicesFK { get; set; }
+
+        public ServiceProviderDetails SP { get; set; }
+        public Services Service { get; set; }
     }
     public class User
     {
@@ -56,27 +76,50 @@ namespace DataAccessLayer
         public int Id { get; set; }
         [StringLength(16, MinimumLength = 4)]
         [Required]
-        [Index(IsUnique =true)]
+        [Index(IsUnique = true)]
         public string Username { get; set; }
         [Required]
-        [StringLength(16,MinimumLength =8)]
+        [StringLength(16, MinimumLength = 8)]
         public string Password { get; set; }
         [Required]
         [StringLength(16, MinimumLength = 4)]
         public string Type { get; set; }
+
+    }
+    public class CustomerDetails
+    {
+        public int Id { get; set; }
+        [ForeignKey("User")]
         [Required]
+        public int UserId { get; set; }
         [StringLength(10, MinimumLength = 10)]
         [Index(IsUnique =true)]
         public string Contact { get; set; }
         [StringLength(16, MinimumLength = 4)]
         public string Location { get; set; }
-        [StringLength(16, MinimumLength = 4)]
-        public string Service { get; set; }
         [ForeignKey("BankAccount")]
+        [Index(IsUnique =true)]
         public int BankFK { get; set; }
 
         public BankAccountDetails BankAccount { get; set; }
+        public User User { get; set; }
+    }
+    public class ServiceProviderDetails
+    {
+        public int Id { get; set; }
+        [ForeignKey("User")]
+        [Required]
+        public int UserId { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength = 10)]
+        [Index(IsUnique = true)]
+        public string Contact { get; set; }
+        [ForeignKey("BankAccount")]
+        [Index(IsUnique = true)]
+        public int BankFK { get; set; }
 
+        public BankAccountDetails BankAccount { get; set; }
+        public User User { get; set; }
     }
     public class Order
     {
@@ -120,7 +163,7 @@ namespace DataAccessLayer
         public int OrderIdFK { get; set; }
         //[Column(TypeName ="decimal(2,1)")]
         public decimal? Stars { get; set; }
-        [StringLength(50)]
+        [StringLength(256)]
         public string Comment { get; set; }
 
         public Order Orders { get; set; }

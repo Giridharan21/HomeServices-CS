@@ -11,7 +11,7 @@ namespace HomeServices.Controllers
         // GET: Profile
         public ActionResult Index()
         {
-            List<DataAccessLayer.Models.Profile> UserDataList= Data.Profile(); 
+            var UserDataList= Data.EditProfile(); 
             return View();
         }
     }
