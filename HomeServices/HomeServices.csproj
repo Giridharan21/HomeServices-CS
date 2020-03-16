@@ -199,6 +199,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CustomerDashboardController.cs" />
     <Compile Include="Controllers\DesignController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -272,6 +273,9 @@
     <Content Include="Views\Provider\Dashboard.cshtml" />
     <Content Include="Views\Provider\ReceivedOrder.cshtml" />
     <Content Include="Views\Provider\Previousorder.cshtml" />
+    <Content Include="Views\Admin\Dashboard.cshtml" />
+    <Content Include="Views\Admin\AddorRemoveServices.cshtml" />
+    <Content Include="Views\Admin\RemoveInvalidUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

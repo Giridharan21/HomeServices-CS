@@ -44,11 +44,12 @@ namespace DataAccessLayer
 
 
         }
-        public static List<ListOrder> PreviousOrder()
+        public static List<ListOrder> PreviousOrder(int orderId)
         {
             List<ListOrder> a = new List<ListOrder>();
             ServicesContext db = new ServicesContext();
             var res = from d in db.Orders
+                      where d.Id == orderId
                       select d;
             foreach (var b in res)
             {
@@ -260,6 +261,14 @@ namespace DataAccessLayer
             a.SaveChanges();
 
         }
-    }    
+        public static void RemoveUsers(int id)
+        {
+            ServicesContext obj = new ServicesContext();
+            var res = (from a in obj.Users
+                      where id == a.Id
+                      select a).FirstOrDefault();
+            obj.Users.Remove(res);
+        }
+        }    
 }
 

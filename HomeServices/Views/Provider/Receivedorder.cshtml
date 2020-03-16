@@ -9,7 +9,6 @@
     <title>Received Orders</title>
 </head>
 <body>
-    @using (Html.BeginForm("Rececivedorder", "Provider", FormMethod.Post))
     {
         <table border="1">
             <tr>
@@ -54,14 +53,14 @@
                 <td>
                     @if (r.Status == "Active")
                     {
-                        using (Html.BeginForm("PlaceOrder", "Provider", FormMethod.Post))
+                        using (Html.BeginForm("ReceivedOrder", "Provider", FormMethod.Post))
                         {
                             @Html.Hidden("OrderId", r.Id)
                             @Html.Hidden("Status", "Accepted")
                             <input type="submit" value="Accept" />
                         }
 
-                        using (Html.BeginForm("PlaceOrder", "Provider", FormMethod.Post))
+                        using (Html.BeginForm("ReceivedOrder", "Provider", FormMethod.Post))
                         {
                             @Html.Hidden("OrderId", r.Id)
                             @Html.Hidden("Status", "Declined")
@@ -70,7 +69,7 @@
 
                     }  @if (r.Status == "Accepted")
                     {
-                        using (Html.BeginForm("PlaceOrder", "Provider", FormMethod.Post))
+                        using (Html.BeginForm("ReceivedOrder", "Provider", FormMethod.Post))
                         {
                             @Html.Hidden("OrderId", r.Id)
                             @Html.Hidden("Status", "Served")
