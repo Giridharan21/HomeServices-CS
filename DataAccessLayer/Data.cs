@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using DataAccessLayer.Models;
 using DataAccessLayer;
-
+using System.Data.Linq;
 namespace DataAccessLayer
 {
     public static class Data
@@ -40,9 +40,9 @@ namespace DataAccessLayer
                        select a).FirstOrDefault();
 
             res.Status = status;
+
+            db.Orders.Add(res);
             db.SaveChanges();
-
-
         }
         public static List<ListOrder> PreviousOrder(int orderId)
         {
@@ -50,7 +50,6 @@ namespace DataAccessLayer
             ServicesContext db = new ServicesContext();
             var res = from d in db.Orders
                       where d.Id == orderId
-                      select d;
             foreach (var b in res)
             {
 
@@ -78,162 +77,187 @@ namespace DataAccessLayer
             var Result = from a in ServiceObj.Orders
                       where a.FromFK==CustomerId
                       select a;
-            foreach(var rec in Result)
+
+            foreach(var i in Result)
             {
                 OrderData OrderObj = new OrderData();
-                OrderObj.id = rec.Id;
-                OrderObj.fromid = rec.FromFK;
-                OrderObj.toid = rec.ToFK;
-                OrderObj.ordereddate = rec.Date;
-                OrderObj.scheduleddate = rec.ScheduleDate;
-                OrderObj.status = rec.Status;
+                OrderObj.id = i.Id;
+                OrderObj.fromid = i.FromFK;
+                OrderObj.toid = i.ToFK;
+                OrderObj.ordereddate = i.Date;
+                OrderObj.scheduleddate = i.ScheduleDate;
+                OrderObj.status = i.Status;
                 OrderDataList.Add(OrderObj);
-
             }
             return OrderDataList;
         }
         public static List<string> ServiceList()
         {
             ServicesContext SerObj = new ServicesContext();
-            List<string> TypeService = new List<string>();
-            var result = SerObj.Users.Select(i => i.Service).Distinct();
-            foreach (var rec in result)
+            List<string> ServiceTypes = new List<string>();
+            var result = SerObj.Services.Select(i => i.Service);
+            foreach (var i in result)
             {
-                TypeService.Add(rec);
+                ServiceTypes.Add(i);
             }
 
-            return TypeService;
+            return ServiceTypes;
         }
-        public static List<ServiceProvider> SPList(string service)
+        public static List<ServiceProviderModel> SPList(string service,int Id)
         {
             ServicesContext SerObj = new ServicesContext();
-            List<ServiceProvider> SPList = new List<ServiceProvider>();
-            var SPResult = from a in SerObj.Users
-                      where a.Service == service
-                      select a;
-            
-            foreach(var rec in SPResult)
+            List<ServiceProviderModel> SPList = new List<ServiceProviderModel>();
+            //var SPResult = from a in SerObj.Users where a.Service == service select a;
+            //Change
+            var ServiceProviders = SerObj.ServicesAssigned.Include("Service").Include("SP")
+                .Join(SerObj.ServiceProviders,Assigned=>Assigned.ServiceProviderFK,SP=>SP.Id,(Assigned,SP)=>new {SP.UserId,SP.Contact,Assigned.Service,Assigned.ServiceProviderFK })
+                .Join(SerObj.Users, g => g.UserId, u => u.Id, (g, u) => new {g.Service,g.Contact,u.Username,g.ServiceProviderFK })
+                .Where(g => g.Service.Service == service).Select(i => i);
+
+            foreach (var i in ServiceProviders)
             {
-                ServiceProvider ServiceObj = new ServiceProvider();
-                ServiceObj.ServiceProviderId = rec.Id;
-                ServiceObj.ServiceProviderName = rec.Username;
-                ServiceObj.Rating = Data.average(rec.Id);
-                //s.CustomerId = (LoginUserInfo)Session["UserData"];
+                var ServiceObj = new ServiceProviderModel();
+                ServiceObj.ServiceProviderId = i.ServiceProviderFK;
+                
+                ServiceObj.ServiceProviderName = i.Username;
+                ServiceObj.Rating = Data.Average(i.ServiceProviderFK);
+                ServiceObj.CustomerId = Id;
                 SPList.Add(ServiceObj);
-               
             }
             return SPList;
         }
-        
-        public static decimal? average(int id)
+        //a to Average
+        public static decimal? Average(int id)
         {
-            ServicesContext service = new ServicesContext();
-            var avg = service.Reviews.Where(i => i.Orders.UserTo.Id == id).Select(i => i.Stars).Average();
-            decimal? average = avg;
-            return average;
+            using (ServicesContext service = new ServicesContext())
+            { 
+                var avg = service.Reviews.Where(i => i.Orders.UserTo.Id == id).Select(i => i.Stars).Average();
+                decimal? average = avg;
+                return average;
+            }
         }
-    
-
       public static UserInfoModel Addlogin(Login Model)
         {
-            ServicesContext i = new ServicesContext();
-            var LoggedBuffer = (from a in i.Users where a.Username == Model.UserName &&
-                       a.Password == Model.Password select a).FirstOrDefault();
-            UserInfoModel UserModel = new UserInfoModel();
-            if (LoggedBuffer != null)
+            using (ServicesContext i = new ServicesContext())
             {
-                UserModel = new UserInfoModel()
+                var LoggedBuffer = (from a in i.Users where a.Username == Model.UserName && a.Password == Model.Password select a)
+                                    .FirstOrDefault();
+                //Change 
+                UserInfoModel UserModel = new UserInfoModel();
+                if ((LoggedBuffer != null) && LoggedBuffer.Type.ToUpperInvariant() == "CUSTOMER")
                 {
-                    Id = LoggedBuffer.Id,
-                    UserName = LoggedBuffer.Username,
-                    Type = LoggedBuffer.Type,
-                    Contact = LoggedBuffer.Contact,
-                    Location = LoggedBuffer.Location,
-                    Service = LoggedBuffer.Service,
-                    BankFk = LoggedBuffer.BankFK
-                };
-            }
-            return UserModel;
+                    var LoggedInUserDetails = i.Customers.Where(g => g.UserId == LoggedBuffer.Id).Select(g => g).FirstOrDefault();
+                    UserModel.Id = LoggedBuffer.Id;
+                    UserModel.UserName = LoggedBuffer.Username;
+                    UserModel.Type = LoggedBuffer.Type;
+                    UserModel.Contact = LoggedInUserDetails.Contact;
+                    UserModel.Location = LoggedInUserDetails.Location;
+                    UserModel.BankFk = LoggedInUserDetails.BankFK;
+                }
+                else if ((LoggedBuffer != null) && LoggedBuffer.Type.ToUpperInvariant() == "SERVICE PROVIDER")
+                {
+                    var LoggedInUserDetails = i.ServiceProviders.Where(g => g.UserId == LoggedBuffer.Id).Select(g => g).FirstOrDefault();
+                    UserModel.Id = LoggedBuffer.Id;
+                    UserModel.UserName = LoggedBuffer.Username;
+                    UserModel.Type = LoggedBuffer.Type;
+                    UserModel.Contact = LoggedInUserDetails.Contact;
+                    UserModel.BankFk = LoggedInUserDetails.BankFK;
+                }
 
+                return UserModel;
+            }
         }
        
-
-
-        public static void AddUser(CustomerRegisterClass dad)
+        public static void AddUser(CustomerRegisterClass NewCustomer)
         {
             var s = new ServicesContext();
-            BankAccountDetails b = new BankAccountDetails();
-            b.BankName = dad.BankName;
-            b.AccountNumber = dad.BankAccNumber;
-            b.Balance = 1000.00m;
-            s.BankAccounts.Add(b);
-            //s.SaveChanges();
-            //var BankId = s.Accounts.Where(g => g.AccountNumber == m.BankAccNumber).Select(g => g.Id).FirstOrDefault();
-            User a= new User();
+
+            BankAccountDetails bank = new BankAccountDetails();
+            bank.BankName = NewCustomer.BankName;
+            bank.AccountNumber = NewCustomer.BankAccNumber;
+            bank.Balance = 1000.00m;
+            s.BankAccounts.Add(bank);
             
-            a.Username = dad.Username;
-            a.Password = dad.Password;
-          
-            a.Contact = dad.Contact;
-            a.Location = dad.Location;
-           
-            a.BankFK =b.Id;
-            a.Type = "CUSTOMER";
-               
-            s.Users.Add(a);
+            User UserObj= new User();
+            UserObj.Username = NewCustomer.Username;
+            UserObj.Password = NewCustomer.Password;
+            UserObj.Type = "CUSTOMER";
+            s.Users.Add(UserObj);
+
+            CustomerDetails customer = new CustomerDetails();
+            customer.Contact = NewCustomer.Contact;
+            customer.UserId= UserObj.Id;
+            customer.Location = NewCustomer.Location;
+            customer.BankFK =bank.Id;
+            s.Customers.Add(customer);
+
             s.SaveChanges();
            
         }
-        public static void registeruser(SPRegisterClass mom)
+        public static void registeruser(SPRegisterClass NewSP)
         {
             var k = new ServicesContext();
-            BankAccountDetails c = new BankAccountDetails();
-            c.BankName = mom.BankName;
-            c.AccountNumber = mom.BankAccNumber;
-            c.Balance = 1000.00m;
-            k.BankAccounts.Add(c);
-            //s.SaveChanges();
-            //var BankId = s.Accounts.Where(g => g.AccountNumber == m.BankAccNumber).Select(g => g.Id).FirstOrDefault();
-            User d = new User();
+            BankAccountDetails bank = new BankAccountDetails();
+            bank.BankName = NewSP.BankName;
+            bank.AccountNumber = NewSP.BankAccNumber;
+            bank.Balance = 1000.00m;
+            k.BankAccounts.Add(bank);
 
-            d.Username = mom.Username;
-            d.Password = mom.Password;
-            d.Service = mom.Service;
-         
-            d.Contact = mom.Contact;
-            
-            d.BankFK = c.Id;
-            d.Type = "SERVICE PROVIDER";
+            User UserObj = new User();
+            UserObj.Username = NewSP.Username;
+            UserObj.Password = NewSP.Password;
+            UserObj.Type = "SERVICE PROVIDER";
+            k.Users.Add(UserObj);
 
-            k.Users.Add(d);
+            ServiceProviderDetails serviceProvider = new ServiceProviderDetails();
+            serviceProvider.UserId = UserObj.Id;
+            serviceProvider.Contact = NewSP.Contact;
+            serviceProvider.BankFK = bank.Id;
+            k.ServiceProviders.Add(serviceProvider);
+
+            var ServiceId = k.Services.Where(g => g.Service == NewSP.Service).Select(g => g.Id).FirstOrDefault();
+
+            ServicesAssigned service = new ServicesAssigned();
+            service.ServiceProviderFK = serviceProvider.Id;
+            service.ServicesFK = ServiceId;
+            k.ServicesAssigned.Add(service);
+
             k.SaveChanges();
-
-
-
         }
-
-        public static List<Profile> Profile()
+        public static List<string> GetServices()
         {
-            List<Profile> UserDataList = new List<Profile>();
-            ServicesContext Profile = new ServicesContext();
-            var Result = from a in Profile.Users
-                         select a;
-              foreach(var b in Result)
-            {
-                Profile pro = new Profile();
-                pro.Id = b.Id;
-                pro.UserName = b.Username;
-                pro.Passsword = b.Password;
-                pro.Type = b.Type;
-                pro.Contact = b.Contact;
-                pro.Location = b.Location;
-                pro.Service = b.Service;
-                pro.BankFk = b.BankFK;
-                UserDataList.Add(pro);
-            }
-            return UserDataList;
-        }  
- 
+            List<string> Services = new List<string>();
+            ServicesContext context = new ServicesContext();
+            var QueryServices = context.Services.Select(g => g.Service);
+            foreach (var i in QueryServices)
+                Services.Add(i);
+            
+            return Services;
+        }
+        public static Profile EditProfile() { return new Profile(); }
+        //public static Profile EditProfile(string Type)
+        //{
+        //    Profile UserDataList = new Profile();
+        //    ServicesContext contextObj = new ServicesContext();
+
+        //    if(Type.ToUpperInvariant() == "CUSTOMER")
+        //    {
+        //        var Result = contextObj.Customers.Include("User").
+        //    }
+        //    Profile pro = new Profile();
+        //    pro.Id = b.Id;
+        //    pro.UserName = b.Username;
+        //    pro.Passsword = b.Password;
+        //    pro.Type = b.Type;
+        //    pro.Contact = b.Contact;
+        //    pro.Location = b.Location;
+        //    pro.Service = b.Service;
+        //    pro.BankFk = b.BankFK;
+        //    UserDataList.Add(pro);
+
+        //    return UserDataList;
+        //}  
+
         public static void PlaceOrder(int ServiceProviderId,DateTime ScheduleDate)
         {
             ServicesContext ContextObj = new ServicesContext();
@@ -242,7 +266,7 @@ namespace DataAccessLayer
             ContextObj.SaveChanges();
             
         }
-        public static void PlaceOrder(ServiceProvider NewOrder)
+        public static void PlaceOrder(ServiceProviderModel NewOrder)
         {
             ServicesContext ContextObj = new ServicesContext();
             Order orderObj = new Order() { Date = DateTime.Now, ScheduleDate = NewOrder.ScheduledDate, FromFK = NewOrder.CustomerId, Status = "Active", ToFK = NewOrder.ServiceProviderId };
@@ -261,6 +285,7 @@ namespace DataAccessLayer
             a.SaveChanges();
 
         }
+
         public static void RemoveUsers(int id)
         {
             ServicesContext obj = new ServicesContext();
@@ -270,5 +295,23 @@ namespace DataAccessLayer
             obj.Users.Remove(res);
         }
         }    
+        //Admin Functions
+        public static void AddService(string ServiceString) {
+            ServicesContext context = new ServicesContext();
+            Services NewService = new Services() { Service=ServiceString};
+            context.Services.Add(NewService);
+            context.SaveChanges();
+        }
+
+        public static int RemoveService(string ServiceString) {
+            ServicesContext context = new ServicesContext();
+            var SelectedRow = context.Services.Where(g => g.Service == ServiceString).Select(g => g).FirstOrDefault();
+            if (SelectedRow is null)
+                return 0;
+            context.Services.Remove(SelectedRow);
+            context.SaveChanges();
+            return 1;
+        }
+    }    
 }
 

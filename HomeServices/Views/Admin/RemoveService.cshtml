@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RemoveService</title>
+</head>
+<body>
+    <h3>Remove Service</h3>
+    <article>
+        @using (Html.BeginForm("RemoveService", "Admin", FormMethod.Post)) {
+            <span>Enter a Service Name To Remove</span>
+            <br />
+            @Html.TextBox("Service", "", new { @Placeholder = "Enter a Service" })
+            <input type="submit" value="Add" />
+        }
+    </article>
+    <script>
+        @Html.Raw(ViewBag.Result);
+    </script>
+</body>
+</html>

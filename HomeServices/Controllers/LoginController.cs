@@ -13,31 +13,29 @@ namespace HomeServices.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            Session["Admin"] = null;
             return View();
         }
         [HttpPost]
         public ActionResult Login(Login Model)
         {
-            
-            if (ModelState.IsValid && Model!=null && Model.UserName == "Admin" && Model.Password == "Admin123")
+            if (ModelState.IsValid && Model!=null)
             {
-                return RedirectToAction("Dashboard", "Admin");
-            }
-            else
-            {
-                UserInfoModel LoggedInUser = Data.Addlogin(Model);
-                if (ModelState.IsValid && Model != null)
-                {
-                    Session["UserData"] = LoggedInUser;
-                    if (LoggedInUser.Type == "CUSTOMER")
-                        return RedirectToAction("Dashboard", "CustomerDashboard");
-                    else if (LoggedInUser.Type == "SERVICE PROVIDER")
-                        return RedirectToAction("Dashboard", "Provider");
+                if (Model.UserName=="admin"&&Model.Password=="admin123") {
+                    Session["Admin"] = "admin";
+                    return Redirect("~/Admin/Index");
                 }
-                ViewBag.Msg = "alert('Invalid User')";
-                return View();
+                Session["Admin"] = null;
+                UserInfoModel LoggedInUser = Data.Addlogin(Model);
+                Session["UserData"] = LoggedInUser;
+                if (LoggedInUser.Type == "CUSTOMER")
+                    return RedirectToAction("Dashboard", "CustomerDashboard");
+                else if ( LoggedInUser.Type == "SERVICE PROVIDER")
+                    return RedirectToAction("Dashboard", "ServiceProvider");
             }
-
+            ViewBag.Msg = "alert('Invalid User')";
+            return View();
         }
+
     }
 }

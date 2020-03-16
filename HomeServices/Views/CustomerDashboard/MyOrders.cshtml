@@ -1,0 +1,233 @@
+﻿@model List<DataAccessLayer.Models.OrderData>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PreviousOrder</title>
+</head>
+<body>
+    @{
+        var Placed = 0;
+        var Accepted = 0;
+        var Cancelled = 0;
+        foreach (var i in Model)
+        {
+            if (i.status == "Active")
+            {
+                Placed++;
+            }
+            else if (i.status == "Completed" || i.status == "Declined")
+            {
+                Cancelled++;
+            }
+            else
+            {
+                Accepted++;
+            }
+
+        }
+    }
+    <h3>Orders Placed</h3>
+    @if (Placed == 0)
+    {
+        <h2>No Orders Yet...</h2>
+    }
+    else
+    {
+        <table border="1">
+            <tr>
+                <td>
+                    Order ID
+                </td>
+                <td>
+                    Ordered By
+                </td>
+                <td>
+                    WorkDone By
+                </td>
+                <td>
+                    Status
+                </td>
+                <td>
+                    Ordered Date
+                </td>
+                <td>
+                    Scheduled Date
+                </td>
+                <td>
+                    Action
+                </td>
+            </tr>
+            @foreach (var i in Model)
+            {
+                if (i.status == "Active")
+                {
+                    <tr>
+                        <td>
+                            @i.id
+                        </td>
+                        <td>
+                            @i.fromid
+                        </td>
+                        <td>
+                            @i.toid
+                        </td>
+                        <td>
+                            @i.status
+                        </td>
+                        <td>
+                            @i.ordereddate
+                        </td>
+                        <td>
+                            @i.scheduleddate
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("ChangeStatus", "CustomerDashboard", FormMethod.Post))
+                            {
+                                <input type="hidden" name="CustomerId" value=@i.id />
+                                <input type="hidden" name="ServiceProviderId" value="Order Cancelled" />
+
+                                <input type="submit" value="Cancel" />
+                            }
+                        </td>
+                    </tr>
+                }
+
+            }
+        </table>
+    }<br />
+    <br />
+    <h3>Accepted Orders</h3>
+    <table border="1">
+        <tr>
+            <td>
+                Order ID
+            </td>
+            <td>
+                Ordered By
+            </td>
+            <td>
+                WorkDone By
+            </td>
+            <td>
+                Status
+            </td>
+            <td>
+                Ordered Date
+            </td>
+            <td>
+                Scheduled Date
+            </td>
+            <td>
+                Action
+            </td>
+        </tr>
+        @foreach (var i in Model)
+        {
+            if (i.status == "Accepted")
+            {
+                <tr>
+                    <td>
+                        @i.id
+                    </td>
+                    <td>
+                        @i.fromid
+                    </td>
+                    <td>
+                        @i.toid
+                    </td>
+                    <td>
+                        @i.status
+                    </td>
+                    <td>
+                        @i.ordereddate
+                    </td>
+                    <td>
+                        @i.scheduleddate
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("ChangeStatus", "CustomerDashboard", FormMethod.Post))
+                        {
+                            <input type="hidden" name="CustomerId" value=@i.id />
+                            <input type="hidden" name="ServiceProviderId" value="Cancel" />
+
+                            <input type="submit" value="Cancel" />
+                        }
+                    </td>
+                </tr>
+            }
+
+        }
+    </table>
+
+    <br />
+    <br />
+    <h3>Completed Orders and Cancelled Orders</h3>
+    <table border="1">
+        <tr>
+            <td>
+                Order ID
+            </td>
+            <td>
+                Ordered By
+            </td>
+            <td>
+                WorkDone By
+            </td>
+            <td>
+                Status
+            </td>
+            <td>
+                Ordered Date
+            </td>
+            <td>
+                Scheduled Date
+            </td>
+            <td>
+                Action
+            </td>
+        </tr>
+        @foreach (var i in Model)
+        {
+            if (i.status == "Completed" || i.status == "Declined")
+            {
+                <tr>
+                    <td>
+                        @i.id
+                    </td>
+                    <td>
+                        @i.fromid
+                    </td>
+                    <td>
+                        @i.toid
+                    </td>
+                    <td>
+                        @i.status
+                    </td>
+                    <td>
+                        @i.ordereddate
+                    </td>
+                    <td>
+                        @i.scheduleddate
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("ChangeStatus", "CustomerDashboard", FormMethod.Post))
+                        {
+                            <input type="hidden" name="CustomerId" value=@i.id />
+
+
+                            <input type="submit" value="Add Review" />
+                        }
+                    </td>
+                </tr>
+            }
+
+        }
+    </table>
+</body>
+</html>
