@@ -246,6 +246,9 @@ namespace DataAccessLayer
             CustomerObj.Contact = User.Contact;
             CustomerObj.Location = User.Location;
             CustomerObj.BankFK = User.BankFk;
+            contextObj.Users.Add(UserObj);
+            contextObj.Customers.Add(CustomerObj);
+            contextObj.SaveChanges();
             
             
         }
@@ -257,7 +260,9 @@ namespace DataAccessLayer
             UserObj.Username = User.UserName;
             ServiceProviderObj.Contact = User.Contact;
             ServiceProviderObj.BankFK = User.BankFk;
-
+            contextObj.Users.Add(UserObj);
+            contextObj.ServiceProviders.Add(ServiceProviderObj);
+            contextObj.SaveChanges();
 
         }
 
@@ -313,6 +318,38 @@ namespace DataAccessLayer
             context.Services.Remove(SelectedRow);
             context.SaveChanges();
             return 1;
+        }
+        public static CustomerProfile CustomerData(int id)
+        {
+            ServicesContext sobj = new ServicesContext();
+            CustomerProfile cobj = new CustomerProfile();
+            string username = (from a in sobj.Users
+                          where a.Id == id
+                          select a.Username).FirstOrDefault();
+            var Details = (from a in sobj.Customers
+                          where a.UserId == id
+                          select a).FirstOrDefault();
+            cobj.BankFk = Details.BankFK;
+            cobj.Contact = Details.Contact;
+            cobj.Location = Details.Location;
+            cobj.UserName = username;                
+            return cobj;
+        }
+        public static ServiceProviderProfile SPData(int id)
+        {
+            ServicesContext serobj = new ServicesContext();
+            ServiceProviderProfile sobj = new ServiceProviderProfile();
+            string username = (from a in serobj.Users
+                               where a.Id == id
+                               select a.Username).FirstOrDefault();
+            var Details = (from a in serobj.ServiceProviders
+                           where a.UserId == id
+                           select a).FirstOrDefault();
+            sobj.BankFk = Details.BankFK;
+            sobj.Contact = Details.Contact;
+            sobj.UserName = username;
+            return sobj;
+           
         }
     }    
 }

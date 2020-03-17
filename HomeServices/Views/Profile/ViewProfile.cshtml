@@ -9,7 +9,7 @@
     <h1>Profile</h1>
 </head>
 <body align="center">
-    
+
     <div>
         @if (Model.Type == "CUSTOMER")
         {
@@ -17,6 +17,7 @@
             <h3>Phone Number:<b>@Model.Contact</b></h3>
             <h3>City:<b>@Model.Location</b></h3>
             <h3>Bank A/C Number:<b>@Model.BankFk</b></h3>
+            <a href="~/CustomerEditProfile/Profile?id=@Model.Id">Edit Profile</a>
         }
         @if (Model.Type == "SERVICE PROVIDER")
         {
@@ -24,9 +25,10 @@
             <h3>Phone Number:<b>@Model.Contact</b></h3>
             <h3>City:<b>@Model.Location</b></h3>
             <h3>Bank A/C Number:<b>@Model.BankFk</b></h3>
-
+            <a href="~/SPEditProfile/Profile?id=@Model.Id">Edit Profile</a>
         }
     </div>
+   
 </body>
 </html>
 
