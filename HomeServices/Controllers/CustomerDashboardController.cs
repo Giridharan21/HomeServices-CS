@@ -45,8 +45,7 @@ namespace HomeServices.Controllers
         [HttpPost]
         public ActionResult ChangeStatus(int OrderId,string Status)
         {
-            //Data.ChangeStatus(OrderId, Status);
-            
+            Data.ChangeStatus(OrderId, Status);
             return RedirectToAction("MyOrders", "CustomerDashboard");
         }
     }

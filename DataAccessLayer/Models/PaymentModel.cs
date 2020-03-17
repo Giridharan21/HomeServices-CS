@@ -8,6 +8,7 @@ namespace DataAccessLayer.Models
 {
     public class PaymentModel
     {
+        public int OrderId { get; set; }
         public string FromBankName { get; set; }
         public string FromAccountNo { get; set; }
         public string ToAccountNo { get; set; }

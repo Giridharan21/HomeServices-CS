@@ -24,6 +24,7 @@ namespace DataAccessLayer
             model.Entity<Review>().Property(g => g.Stars).HasPrecision(2, 1);
             model.Entity<BankAccountDetails>().Property(g => g.Balance).HasPrecision(10, 2);
             model.Entity<ServiceProviderDetails>().Property(g => g.Charge).HasPrecision(7, 2);
+            model.Entity<Order>().Property(g => g.finalPrice).HasPrecision(7, 2);
         }
        
 
@@ -137,7 +138,9 @@ namespace DataAccessLayer
         public DateTime Date { get; set; }
         [Required]
         public DateTime ScheduleDate { get; set; }
-
+        [Required]
+        public decimal finalPrice { get; set; }
+        
         public User UserFrom { get; set; } 
         public User UserTo { get; set; } 
     }

@@ -89,8 +89,8 @@
                         <td>
                             @using (Html.BeginForm("ChangeStatus", "CustomerDashboard", FormMethod.Post))
                             {
-                                <input type="hidden" name="CustomerId" value=@i.id />
-                                <input type="hidden" name="ServiceProviderId" value="Order Cancelled" />
+                                <input type="hidden" name="OrderId" value=@i.id />
+                                <input type="hidden" name="Status" value="Order Cancelled" />
 
                                 <input type="submit" value="Cancel" />
                             }
@@ -153,8 +153,8 @@
                     <td>
                         @using (Html.BeginForm("ChangeStatus", "CustomerDashboard", FormMethod.Post))
                         {
-                            <input type="hidden" name="CustomerId" value=@i.id />
-                            <input type="hidden" name="ServiceProviderId" value="Cancel" />
+                            <input type="hidden" name="OrderId" value=@i.id />
+                            <input type="hidden" name="Status" value="Cancel" />
 
                             <input type="submit" value="Cancel" />
                         }
@@ -162,8 +162,7 @@
                     <td>
                         @if (i.status == "Served") {
                             using (Html.BeginForm("Pay", "Payment", FormMethod.Post)) {
-                                <input type="hidden" name="CustomerId" value=@i.id />
-                                <input type="hidden" name="ServiceProviderId" value="Cancel" />
+                                <input type="hidden" name="OrderId" value=@i.id />
 
                                 <input type="submit" value="Pay" />
                             }

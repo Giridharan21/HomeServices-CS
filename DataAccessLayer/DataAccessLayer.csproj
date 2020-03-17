@@ -163,6 +163,10 @@
     <Compile Include="Migrations\202003161900495_AddCharge.Designer.cs">
       <DependentUpon>202003161900495_AddCharge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003170309075_FinalPrice.cs" />
+    <Compile Include="Migrations\202003170309075_FinalPrice.Designer.cs">
+      <DependentUpon>202003170309075_FinalPrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\reviewmodel.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -203,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003161900495_AddCharge.resx">
       <DependentUpon>202003161900495_AddCharge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003170309075_FinalPrice.resx">
+      <DependentUpon>202003170309075_FinalPrice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

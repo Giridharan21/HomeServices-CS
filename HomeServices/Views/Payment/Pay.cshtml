@@ -11,14 +11,15 @@
     <title>Payment</title>
 </head>
 <body>
-    @using (Html.BeginForm("Payment","Payment",FormMethod.Post)) {
+    @using (Html.BeginForm("Pay","Payment",FormMethod.Post)) {
         <h1>@Model.FromBankName</h1>
         <span>Your Account No:</span><h5>@Model.FromAccountNo</h5>
         <span>To: </span><h5>@Model.ToAccountNo</h5>
         <span>Amount: </span><h4>@Model.Amount</h4>
 
         <span>Enter Your Password</span><br />
-        @Html.Password("Password")
+        @Html.HiddenFor(g=>g.OrderId)
+        @Html.PasswordFor(g=>g.Password)
         <input type="submit" value="Pay"/>
     }
 </body>

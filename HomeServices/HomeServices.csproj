@@ -259,7 +259,7 @@
     <Content Include="Views\CustomerDashboard\ServiceProvider.cshtml" />
     <Content Include="Views\Register\customer.cshtml" />
     <Content Include="Views\Register\ServiceProvider.cshtml" />
-    <Content Include="Views\Payment\Payment.cshtml" />
+    <Content Include="Views\Payment\Pay.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\review\Index.cshtml" />
