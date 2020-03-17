@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -89,7 +90,7 @@ namespace DataAccessLayer
                 OrderObj.ordereddate = i.Date;
                 OrderObj.scheduleddate = i.ScheduleDate;
                 OrderObj.status = i.Status;
-                OrderObj.price=i.FinalPrice
+                OrderObj.price = i.FinalPrice;
                 OrderDataList.Add(OrderObj);
             }
             return OrderDataList;
@@ -264,14 +265,7 @@ namespace DataAccessLayer
 
         }
 
-        public static void PlaceOrder(int ServiceProviderId,DateTime ScheduleDate)
-        {
-            ServicesContext ContextObj = new ServicesContext();
-            Order orderObj = new Order() {Date=DateTime.Now,ScheduleDate=ScheduleDate, FromFK=1, Status="Active", ToFK=ServiceProviderId};
-            ContextObj.Orders.Add(orderObj);
-            ContextObj.SaveChanges();
-            
-        }
+        
         public static void PlaceOrder(ServiceProviderModel NewOrder)
         {
             ServicesContext ContextObj = new ServicesContext();
@@ -318,6 +312,71 @@ namespace DataAccessLayer
             context.SaveChanges();
             return 1;
         }
-    }    
+        //Giri Get Specific Order
+        public static PaymentModel GetOrder(int OrderId)
+        {
+            ServicesContext context = new ServicesContext();
+            var OrderQuery = context.Orders.Include("UserFrom").Include("UserTo").Include("BankAccount").Include("User").Include("BankAccount")
+                .Join(context.Customers,o=>o.UserFrom.Id,c=>c.UserId,(o,c)=>new {o.UserTo,o.UserFrom,o.FinalPrice,o.ScheduleDate,c.BankAccount,c.User,o.Id,c.User.Username })
+                .Join(context.ServiceProviders,j=>j.UserTo.Id,s=>s.UserId,(j,s)=>new {j.Id,j.FinalPrice,j.ScheduleDate,j.User,j.Username,j.UserFrom,j.UserTo,j.BankAccount,s.BankAccount.AccountNumber })
+                .Where(i => i.Id == OrderId)
+                .Select(i=>i).FirstOrDefault();
+            var Data = new PaymentModel() {
+                Amount=OrderQuery.FinalPrice,
+                FromAccountNo=OrderQuery.BankAccount.AccountNumber,
+                ToAccountNo=OrderQuery.AccountNumber,
+                FromBankName=OrderQuery.BankAccount.BankName,
+                OrderId=OrderQuery.Id,
+                Username=OrderQuery.Username
+                 
+            };
+            
+            return Data;
+        }
+
+        public static int Authenticate(PaymentModel Pay)
+        {
+            using(ServicesContext context = new ServicesContext())
+            {
+                var check = context.Users.Where(i => i.Username == Pay.Username && i.Password == Pay.Password).FirstOrDefault();
+                if (check is null)
+                    return 0;
+                else
+                    return 1;
+            }
+        }
+        public static int MakePayment(PaymentModel Pay)
+        {
+            try
+            {
+                using (ServicesContext context = new ServicesContext())
+                {
+                    var customer = context.BankAccounts.Where(g => g.AccountNumber == Pay.FromAccountNo).FirstOrDefault();
+                    customer.Balance = customer.Balance - Pay.Amount;
+                    var ServiceProvider = context.BankAccounts.Where(g => g.AccountNumber == Pay.ToAccountNo).FirstOrDefault();
+                    ServiceProvider.Balance += Pay.Amount;
+                    var order = context.Orders.Where(g => g.Id == Pay.OrderId).FirstOrDefault();
+                    order.Status = "Completed";
+                    Payment payment = new Payment();
+                    payment.Amount = Pay.Amount;
+                    payment.Date = DateTime.Now;
+                    payment.Status = "Paid";
+                    payment.OrderIdFK = Pay.OrderId;
+                    context.Payments.Add(payment);
+                    context.SaveChanges();
+                    return 1;
+                }
+            }
+            catch(Exception Exp)
+            {
+                ServicesContext context = new ServicesContext();
+                var paymentRow = context.Payments.Where(i => i.OrderIdFK == Pay.OrderId).FirstOrDefault();
+                paymentRow.Status = "Error Not Paid";
+                context.SaveChanges();
+                string Error = Exp.Message;
+                return 0;
+            }
+        }
+    }
 }
 
