@@ -10,8 +10,8 @@ namespace DataAccessLayer.Models
   public  class SPRegisterClass
     {
 
-        [MinLength(4,ErrorMessage ="Minimum Length is 4")]
-        [MaxLength(16, ErrorMessage = "Maximum Length is 16")]
+        [MinLength(4,ErrorMessage ="User Name Minimum Length is 4")]
+        [MaxLength(16, ErrorMessage = "User Name Maximum Length is 16")]
         [Required(ErrorMessage ="User Name is Required")]
         [RegularExpression(@"^[a-zA-Z]{1,16}[0-9]+$", ErrorMessage = "UserName Should Be AlphaNumeric.")]
         public string Username { get; set; }
@@ -34,21 +34,23 @@ namespace DataAccessLayer.Models
         public string Type { get; set; }
 
         [Required(ErrorMessage = "Contact Number is Required")]
-        [MinLength(10, ErrorMessage = "Minimum Length is 10")]
-        [MaxLength(10, ErrorMessage = "Maximum Length is 10")]
+        [MinLength(10, ErrorMessage = "Contact Number Length is 10")]
+        [MaxLength(10, ErrorMessage = "Contact Number Length is 10")]
         public string Contact { get; set; }
 
         [Required(ErrorMessage = "Service is Required")]
         public string Service { get; set; }
 
+        [Required(ErrorMessage ="Charge is Required")]
+        public decimal Charge { get; set; }
+       
 
-
-        [Required(ErrorMessage = "Bank name is Required")]
+       [Required(ErrorMessage = "Bank name is Required")]
         public string BankName { get; set; }
 
         [Required(ErrorMessage = "Bank Account Number is Required")]
-        [MinLength(12, ErrorMessage = "Minimum Length is 12")]
-        [MaxLength(12, ErrorMessage = "Maximum Length is 12")]
+        [MinLength(9, ErrorMessage = "Bank Account Number Minimum Length is 12")]
+        [MaxLength(18, ErrorMessage = "Bank Account Number Maximum Length is 12")]
         public string BankAccNumber { get; set; }
 
        

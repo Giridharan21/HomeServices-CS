@@ -12,8 +12,8 @@ namespace DataAccessLayer.Models
 
         
 
-        [MinLength(4, ErrorMessage = "Minimum Length is 4")]
-        [MaxLength(16, ErrorMessage = "Maximum Length is 16")]
+        [MinLength(4, ErrorMessage = "User Name Minimum Length is 4")]
+        [MaxLength(16, ErrorMessage = "User Name Maximum Length is 16")]
         [Required(ErrorMessage = "UserName is Required")]
         [RegularExpression(@"^[a-zA-Z]{1,16}[0-9]*$", ErrorMessage = "UserName Should Be AlphaNumeric.")]
         public string Username { get; set; }
@@ -34,8 +34,8 @@ namespace DataAccessLayer.Models
         public string Type { get; set; }
 
         [Required(ErrorMessage = "Contact is Required")]
-        [MinLength(10, ErrorMessage = "Minimum Length is 10")]
-        [MaxLength(10, ErrorMessage = "Maximum Length is 10")]
+        [MinLength(10, ErrorMessage = "Contact Length is 10")]
+        [MaxLength(10, ErrorMessage = "Contact Length is 10")]
         public string Contact { get; set; }
 
 
@@ -46,8 +46,8 @@ namespace DataAccessLayer.Models
         public string BankName { get; set; }
 
         [Required(ErrorMessage = "Bank Account Number is Required")]
-        [MinLength(12, ErrorMessage = "Minimum Length is 12")]
-        [MaxLength(12, ErrorMessage = "Maximum Length is 12")]
+        [MinLength(9, ErrorMessage = "Bank Account Number Minimum Length is 9")]
+        [MaxLength(18, ErrorMessage = "Bank Account Number Maximum Length is 18")]
         public string BankAccNumber { get; set; }
 
 
