@@ -25,7 +25,7 @@ namespace HomeServices.Controllers
                     Session["Admin"] = "admin";
                     return Redirect("~/Admin/Index");
                 }
-                Session["Admin"] = null;
+               Session["Admin"] = null;
                 UserInfoModel LoggedInUser = Data.Addlogin(Model);
                 Session["UserData"] = LoggedInUser;
                 if (LoggedInUser.Type == "CUSTOMER")

@@ -236,29 +236,30 @@ namespace DataAccessLayer
             
             return Services;
         }
-        public static Profile EditProfile() { return new Profile(); }
-        //public static Profile EditProfile(string Type)
-        //{
-        //    Profile UserDataList = new Profile();
-        //    ServicesContext contextObj = new ServicesContext();
+        //public static Profile EditProfile() { return new Profile(); }
+        public static void EditProfile(CustomerProfile User,int UserId)
+        {
+            ServicesContext contextObj = new ServicesContext();
+            var UserObj = contextObj.Users.Where(g => g.Id == UserId).Select(g => g).FirstOrDefault();
+            var CustomerObj = contextObj.Customers.Where(g => g.UserId == UserId).Select(g => g).FirstOrDefault();
+            UserObj.Username = User.UserName;
+            CustomerObj.Contact = User.Contact;
+            CustomerObj.Location = User.Location;
+            CustomerObj.BankFK = User.BankFk;
+            
+            
+        }
+        public static void EditProfile(ServiceProviderProfile User, int UserId)
+        {
+            ServicesContext contextObj = new ServicesContext();
+            var UserObj = contextObj.Users.Where(g => g.Id == UserId).Select(g => g).FirstOrDefault();
+            var ServiceProviderObj = contextObj.ServiceProviders.Where(g => g.UserId == UserId).Select(g => g).FirstOrDefault();
+            UserObj.Username = User.UserName;
+            ServiceProviderObj.Contact = User.Contact;
+            ServiceProviderObj.BankFK = User.BankFk;
 
-        //    if(Type.ToUpperInvariant() == "CUSTOMER")
-        //    {
-        //        var Result = contextObj.Customers.Include("User").
-        //    }
-        //    Profile pro = new Profile();
-        //    pro.Id = b.Id;
-        //    pro.UserName = b.Username;
-        //    pro.Passsword = b.Password;
-        //    pro.Type = b.Type;
-        //    pro.Contact = b.Contact;
-        //    pro.Location = b.Location;
-        //    pro.Service = b.Service;
-        //    pro.BankFk = b.BankFK;
-        //    UserDataList.Add(pro);
 
-        //    return UserDataList;
-        //}  
+        }
 
         public static void PlaceOrder(int ServiceProviderId,DateTime ScheduleDate)
         {
