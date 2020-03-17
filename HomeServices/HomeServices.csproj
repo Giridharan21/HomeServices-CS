@@ -275,7 +275,6 @@
     <Content Include="Views\Admin\RemoveService.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Profile\ViewProfile.cshtml" />
-    <Content Include="Views\Profile\CustomerEditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
