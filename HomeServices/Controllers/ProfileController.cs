@@ -17,6 +17,32 @@ namespace HomeServices.Controllers
             
             return View(Details);
         }
+        
+        public ActionResult CustomerEditProfile(int id)
+        {
+            var CustomerDetails=Data.CustomerData(id);
+            return View(CustomerDetails);
+        }
+        [HttpPost]
+        public ActionResult CustomerEditProfile(CustomerProfile obj)
+        {
+            var Details = (UserInfoModel)Session["UserData"];
+            Data.EditProfile(obj, Details.Id);
+            return RedirectToAction("ViewProfile");
+        }
+        public ActionResult SPEditProfile(int id)
+        {
+            var SPDetails = Data.SPData(id);
+            return View(SPDetails);
+            
+        }
+        [HttpPost]
+        public ActionResult SPEditProfile(ServiceProviderProfile obj)
+        {
+            var Details = (UserInfoModel)Session["UserData"];
+            Data.EditProfile(obj, Details.Id);
+            return RedirectToAction("ViewProfile");
+        }
 
     }
 }
