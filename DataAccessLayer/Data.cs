@@ -112,8 +112,8 @@ namespace DataAccessLayer
             //var SPResult = from a in SerObj.Users where a.Service == service select a;
             //Change
             var ServiceProviders = SerObj.ServicesAssigned.Include("Service").Include("SP")
-                .Join(SerObj.ServiceProviders,Assigned=>Assigned.ServiceProviderFK,SP=>SP.Id,(Assigned,SP)=>new {SP.UserId,SP.Contact,Assigned.Service,Assigned.ServiceProviderFK })
-                .Join(SerObj.Users, g => g.UserId, u => u.Id, (g, u) => new {g.Service,g.Contact,u.Username,g.ServiceProviderFK })
+                .Join(SerObj.ServiceProviders,Assigned=>Assigned.ServiceProviderFK,SP=>SP.Id,(Assigned,SP)=>new {Assigned.Charge,SP.UserId,SP.Contact,Assigned.Service,Assigned.ServiceProviderFK })
+                .Join(SerObj.Users, g => g.UserId, u => u.Id, (g, u) => new {g.Charge,g.Service,g.Contact,u.Username,g.ServiceProviderFK})
                 .Where(g => g.Service.Service == service).Select(i => i);
 
             foreach (var i in ServiceProviders)
@@ -124,6 +124,7 @@ namespace DataAccessLayer
                 ServiceObj.ServiceProviderName = i.Username;
                 ServiceObj.Rating = Data.Average(i.ServiceProviderFK);
                 ServiceObj.CustomerId = Id;
+                ServiceObj.Price = i.Charge;
                 SPList.Add(ServiceObj);
             }
             return SPList;
@@ -271,7 +272,8 @@ namespace DataAccessLayer
         public static void PlaceOrder(ServiceProviderModel NewOrder)
         {
             ServicesContext ContextObj = new ServicesContext();
-            Order orderObj = new Order() { Date = DateTime.Now, ScheduleDate = NewOrder.ScheduledDate, FromFK = NewOrder.CustomerId, Status = "Active", ToFK = NewOrder.ServiceProviderId };
+            Order orderObj = new Order() { Date = DateTime.Now,FinalPrice=NewOrder.Price, ScheduleDate = NewOrder.ScheduledDate, FromFK = NewOrder.CustomerId, Status = "Active", ToFK = NewOrder.ServiceProviderId };
+
             ContextObj.Orders.Add(orderObj);
             ContextObj.SaveChanges();
 
