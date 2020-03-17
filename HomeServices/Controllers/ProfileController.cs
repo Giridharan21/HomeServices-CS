@@ -4,15 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataAccessLayer;
+using DataAccessLayer.Models;
+
 namespace HomeServices.Controllers
 {
     public class ProfileController : Controller
     {
         // GET: Profile
-        public ActionResult Index()
+        public ActionResult ViewProfile()
         {
-            var UserDataList= Data.EditProfile(); 
-            return View();
+            var Details = (UserInfoModel)Session["UserData"];
+            
+            return View(Details);
         }
+
     }
 }

@@ -18,6 +18,6 @@ namespace DataAccessLayer.Models
         public string Location { get; set; }
         public string Service { get; set; }
         public int BankFk { get; set; }
-
+        public decimal Charge { get; set; }
     }
 }
