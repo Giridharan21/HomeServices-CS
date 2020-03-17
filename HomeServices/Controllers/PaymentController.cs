@@ -13,14 +13,23 @@ namespace HomeServices.Controllers
         [HttpGet]
         public ActionResult Pay(int OrderId)
         {
-            
-            return View();
+            Session["Payment"] = "";
+            var NewPayment = Data.GetOrder(OrderId);
+                     
+            return View(NewPayment);
         }
         [HttpPost]
         public ActionResult Pay(PaymentModel PayObj)
         {
-
-            return View();
+            var result = Data.Authenticate(PayObj);
+            if(result == 0)
+            {
+                Session["Payment"] = "alert('Invalid Password')";
+                return RedirectToAction("MyOrders", "CustomerDashboard");
+            }
+            Session["Payment"] = "alert('Payment Successfull')";
+            Data.MakePayment(PayObj);
+            return RedirectToAction("MyOrders","CustomerDashboard");
         }
     }
 }

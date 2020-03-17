@@ -25,6 +25,9 @@
             <th>
                 Schedule Date
             </th>
+            <th>
+                Price
+            </th>
             <th colspan="2">
                 Action
             </th>
@@ -45,6 +48,9 @@
             {
                 <td>
                     <input type="datetime-local" name="ScheduledDate" />
+                </td>
+                <td>
+                    <input type="text" readonly value=@i.Price name="Price" />
                 </td>
                 <td>
                     <input type="hidden" name ="CustomerId" value=@i.CustomerId />

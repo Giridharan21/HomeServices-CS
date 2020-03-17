@@ -39,12 +39,15 @@ namespace HomeServices.Controllers
             var Id = (UserInfoModel)Session["UserData"];
             var Result = Data.Order(Id.Id);
             //ViewBag.result = Result;
+            ViewBag.Payment = (string)Session["Payment"];
+            Session["Payment"] = null;
             return View(Result);
         }
 
         [HttpPost]
         public ActionResult ChangeStatus(int OrderId,string Status)
         {
+            ViewBag.Payment = (string)Session["Payment"];
             Data.ChangeStatus(OrderId, Status);
             return RedirectToAction("MyOrders", "CustomerDashboard");
         }

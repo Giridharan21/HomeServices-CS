@@ -134,6 +134,9 @@
                     Scheduled Date
                 </td>
                 <td>
+                    Price
+                </td>
+                <td>
                     Action
                 </td>
             </tr>
@@ -177,7 +180,7 @@
                             }
                             else if (i.status == "Served")
                             {
-                                using (Html.BeginForm("Pay", "Payment", FormMethod.Post))
+                                using (Html.BeginForm("Pay", "Payment", FormMethod.Get))
                                 {
                                     <input type="hidden" name="OrderId" value=@i.id />
 
@@ -219,6 +222,9 @@
                 </td>
                 <td>
                     Scheduled Date
+                </td>
+                <td>
+                    Price
                 </td>
                 <td>
                     Action
@@ -265,5 +271,9 @@
             }
         </table>
     }
+<script>
+    @Html.Raw(ViewBag.Payment)
+</script>
 </body>
+
 </html>
