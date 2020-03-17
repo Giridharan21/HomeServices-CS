@@ -36,11 +36,6 @@ namespace HomeServices.Controllers
             ViewBag.Msg = "alert('Invalid User')";
             return View();
         }
-        public ActionResult Logout()
-        {
-            Session["UserData"] = null;
-            return RedirectToAction("Login", "Login");
-            
-        }
+
     }
 }
