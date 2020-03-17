@@ -14,5 +14,6 @@ namespace DataAccessLayer.Models
         public string status { get; set; }
         public DateTime ordereddate { get; set; }
         public DateTime scheduleddate { get; set; }
+        public decimal price { get; set; }
     }
 }
