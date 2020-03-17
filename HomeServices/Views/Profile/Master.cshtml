@@ -1,0 +1,72 @@
+﻿@model List<DataAccessLayer.Models.Profile>
+@{
+    Layout = null;
+}
+<title>Profile</title>
+<body>
+    @using (Html.BeginForm("Master", "Profile", FormMethod.Post))
+    {
+        <table border="1">
+            <tr>
+                <td>
+                    ID
+                </td>
+                <td>
+                    USERNAME
+                </td>
+                <td>
+                    TYPE
+                </td>
+                <td>
+                    CONTACT
+                </td>
+                <td>
+                    LOCATION
+                </td>
+                <td>
+                    SERVICE
+                </td>
+                <td>
+                    BANKFK
+                </td>
+            </tr>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>
+                        @i.Id
+                    </td>
+                    <td>
+                        @i.UserName
+                    </td>
+                    <td>
+                        @i.Type
+                    </td>
+                    <td>
+                        @i.Contact
+                    </td>
+                    <td>
+                        @i.Location
+                    </td>
+                    <td>
+                        @i.Service
+                    </td>
+                    <td>
+                        @i.BankFk
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @using (Html.BeginForm("EditView", "Profile", FormMethod.Post))
+                        {
+                            <input type="submit" value="Edit" />
+                        }
+
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</body>
+
+

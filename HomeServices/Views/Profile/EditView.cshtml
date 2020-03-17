@@ -1,0 +1,36 @@
+﻿@model DataAccessLayer.Models.Profile
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Edit Profile";
+}
+@using (Html.BeginForm("EditView", "Profile", FormMethod.Post))
+{
+
+    <span>ID:</span>@Html.TextBoxFor(g => g.Id);<br />
+
+    <span>UserName:</span>@Html.TextBoxFor(g => g.UserName);<br />
+
+    <span>Type:</span>@Html.TextBoxFor(g => g.Type);<br />
+
+    <span>Contact:</span>@Html.TextBoxFor(g => g.Contact);<br />
+
+    <span>Location:</span>@Html.TextBoxFor(g => g.Location);<br />
+
+    <span>Service:</span>@Html.TextBoxFor(g => g.Service);<br />
+
+
+
+    <span>BankFk:</span>@Html.TextBoxFor(g => g.BankFk);<br />
+
+    
+
+
+    <input type="submit" value="Save" />
+    @Html.ValidationSummary()
+}
+
+
+

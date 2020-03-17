@@ -156,24 +156,25 @@ namespace DataAccessLayer
 
         }
 
-        public static List<Profile> Profile()
+        public static List<Profile> Profile(int id)
         {
             List<Profile> UserDataList = new List<Profile>();
             ServicesContext Profile = new ServicesContext();
-            var Result = from a in Profile.Users
-                         select a;
+            var Result = (from a in Profile.Users
+                          where id == a.Id
+                          select a);
               foreach(var b in Result)
             {
                 Profile pro = new Profile();
                 pro.Id = b.Id;
                 pro.UserName = b.Username;
-                pro.Passsword = b.Password;
                 pro.Type = b.Type;
                 pro.Contact = b.Contact;
                 pro.Location = b.Location;
                 pro.Service = b.Service;
                 pro.BankFk = b.BankFK;
                 UserDataList.Add(pro);
+
             }
             return UserDataList;
         }  

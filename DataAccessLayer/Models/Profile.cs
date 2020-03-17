@@ -14,8 +14,6 @@ namespace DataAccessLayer.Models
         [Required]
         public string UserName { get; set; }
         [Required]
-        public string Passsword { get; set; }
-        [Required]
         public string Type{ get; set; }
         [Required]
         public string Contact { get; set; }

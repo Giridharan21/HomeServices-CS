@@ -32,7 +32,7 @@
                     Username
                 </td>
                 <td>
-                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Enter Username" })
 
                 </td>
             </tr>
@@ -41,12 +41,12 @@
                     Password
                 </td>
                 <td>
-                    @Html.PasswordFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Enter Password" })
 
                 </td>
 
             <tr>
-                <td>
+                <td> 
                     <input type="Submit" width="100" value="Login" />
                 </td>
             </tr>
