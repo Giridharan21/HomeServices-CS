@@ -6,15 +6,26 @@
 
 <html>
 <head>
-
+    <h1>Profile</h1>
 </head>
-<body>
-
+<body align="center">
+    
     <div>
-        <b>@Model.UserName</b>
-        <h1>@Model.Contact</h1>
-        <h2>@Model.Location</h2>
-        
+        @if (Model.Type == "CUSTOMER")
+        {
+            <h3>UserName:<b>@Model.UserName</b></h3>
+            <h3>Phone Number:<b>@Model.Contact</b></h3>
+            <h3>City:<b>@Model.Location</b></h3>
+            <h3>Bank A/C Number:<b>@Model.BankFk</b></h3>
+        }
+        @if (Model.Type == "SERVICE PROVIDER")
+        {
+            <h3>UserName:<b>@Model.UserName</b></h3>
+            <h3>Phone Number:<b>@Model.Contact</b></h3>
+            <h3>City:<b>@Model.Location</b></h3>
+            <h3>Bank A/C Number:<b>@Model.BankFk</b></h3>
+
+        }
     </div>
 </body>
 </html>
