@@ -202,7 +202,7 @@ namespace DataAccessLayer
             BankAccountDetails bank = new BankAccountDetails();
             bank.BankName = NewSP.BankName;
             bank.AccountNumber = NewSP.BankAccNumber;
-            bank.Balance = 1000.00m;
+            
             k.BankAccounts.Add(bank);
 
             User UserObj = new User();
@@ -222,6 +222,7 @@ namespace DataAccessLayer
             ServicesAssigned service = new ServicesAssigned();
             service.ServiceProviderFK = serviceProvider.Id;
             service.ServicesFK = ServiceId;
+            service.Charge = NewSP.Charge;
             k.ServicesAssigned.Add(service);
 
             k.SaveChanges();
