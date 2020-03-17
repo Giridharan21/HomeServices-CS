@@ -155,17 +155,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202003161052478_Final.cs" />
-    <Compile Include="Migrations\202003161052478_Final.Designer.cs">
-      <DependentUpon>202003161052478_Final.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003161900495_AddCharge.cs" />
-    <Compile Include="Migrations\202003161900495_AddCharge.Designer.cs">
-      <DependentUpon>202003161900495_AddCharge.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003170309075_FinalPrice.cs" />
-    <Compile Include="Migrations\202003170309075_FinalPrice.Designer.cs">
-      <DependentUpon>202003170309075_FinalPrice.cs</DependentUpon>
+    <Compile Include="Migrations\202003170417301_change.cs" />
+    <Compile Include="Migrations\202003170417301_change.Designer.cs">
+      <DependentUpon>202003170417301_change.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\reviewmodel.cs" />
     <Compile Include="Data.cs" />
@@ -202,14 +194,8 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003161052478_Final.resx">
-      <DependentUpon>202003161052478_Final.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003161900495_AddCharge.resx">
-      <DependentUpon>202003161900495_AddCharge.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003170309075_FinalPrice.resx">
-      <DependentUpon>202003170309075_FinalPrice.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003170417301_change.resx">
+      <DependentUpon>202003170417301_change.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

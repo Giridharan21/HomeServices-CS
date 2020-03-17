@@ -23,8 +23,8 @@ namespace DataAccessLayer
             model.Entity<Payment>().Property(g => g.Amount).HasPrecision(10, 2);
             model.Entity<Review>().Property(g => g.Stars).HasPrecision(2, 1);
             model.Entity<BankAccountDetails>().Property(g => g.Balance).HasPrecision(10, 2);
-            model.Entity<ServiceProviderDetails>().Property(g => g.Charge).HasPrecision(7, 2);
-            model.Entity<Order>().Property(g => g.finalPrice).HasPrecision(7, 2);
+            model.Entity<ServicesAssigned>().Property(g => g.Charge).HasPrecision(7, 2);
+            model.Entity<Order>().Property(g => g.FinalPrice).HasPrecision(7, 2);
         }
        
 
@@ -68,6 +68,7 @@ namespace DataAccessLayer
         [Required]
         [ForeignKey("Service")]
         public int ServicesFK { get; set; }
+        public decimal Charge { get; set; }
 
         public ServiceProviderDetails SP { get; set; }
         public Services Service { get; set; }
@@ -119,7 +120,7 @@ namespace DataAccessLayer
         [ForeignKey("BankAccount")]
         [Index(IsUnique = true)]
         public int BankFK { get; set; }
-        public decimal Charge { get; set; }
+        
 
         public BankAccountDetails BankAccount { get; set; }
         public User User { get; set; }
@@ -139,7 +140,7 @@ namespace DataAccessLayer
         [Required]
         public DateTime ScheduleDate { get; set; }
         [Required]
-        public decimal finalPrice { get; set; }
+        public decimal FinalPrice { get; set; }
         
         public User UserFrom { get; set; } 
         public User UserTo { get; set; } 

@@ -3,7 +3,7 @@ namespace DataAccessLayer.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Final : DbMigration
+    public partial class change : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,7 @@ namespace DataAccessLayer.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         BankName = c.String(),
-                        AccountNumber = c.String(maxLength:20),
+                        AccountNumber = c.String(maxLength:18),
                         Balance = c.Decimal(nullable: false, precision: 10, scale: 2),
                     })
                 .PrimaryKey(t => t.Id)
@@ -25,14 +25,14 @@ namespace DataAccessLayer.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         UserId = c.Int(nullable: false),
-                        Contact = c.String(nullable:false,maxLength: 10),
+                        Contact = c.String(maxLength: 10),
                         Location = c.String(maxLength: 16),
                         BankFK = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.BankAccountDetails", t => t.BankFK, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId,unique:true)
+                .Index(t => t.UserId)
                 .Index(t => t.Contact, unique: true)
                 .Index(t => t.BankFK, unique: true);
             
@@ -58,6 +58,7 @@ namespace DataAccessLayer.Migrations
                         Status = c.String(nullable: false, maxLength: 10),
                         Date = c.DateTime(nullable: false),
                         ScheduleDate = c.DateTime(nullable: false),
+                        FinalPrice = c.Decimal(nullable: false, precision: 7, scale: 2),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.FromFK, cascadeDelete: false)
@@ -77,7 +78,7 @@ namespace DataAccessLayer.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Orders", t => t.OrderIdFK, cascadeDelete: true)
-                .Index(t => t.OrderIdFK,unique:true);
+                .Index(t => t.OrderIdFK);
             
             CreateTable(
                 "dbo.Reviews",
@@ -125,6 +126,7 @@ namespace DataAccessLayer.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         ServiceProviderFK = c.Int(nullable: false),
                         ServicesFK = c.Int(nullable: false),
+                        Charge = c.Decimal(nullable: false, precision: 7, scale: 2),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Services", t => t.ServicesFK, cascadeDelete: true)
