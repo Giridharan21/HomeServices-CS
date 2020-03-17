@@ -89,6 +89,7 @@ namespace DataAccessLayer
                 OrderObj.ordereddate = i.Date;
                 OrderObj.scheduleddate = i.ScheduleDate;
                 OrderObj.status = i.Status;
+                OrderObj.price=i.FinalPrice
                 OrderDataList.Add(OrderObj);
             }
             return OrderDataList;
