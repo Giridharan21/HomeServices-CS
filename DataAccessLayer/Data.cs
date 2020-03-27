@@ -113,21 +113,34 @@ namespace DataAccessLayer
             List<ServiceProviderModel> SPList = new List<ServiceProviderModel>();
             //var SPResult = from a in SerObj.Users where a.Service == service select a;
             //Change
-            var ServiceProviders = SerObj.ServicesAssigned.Include("Service").Include("SP")
-                .Join(SerObj.ServiceProviders,Assigned=>Assigned.ServiceProviderFK,SP=>SP.Id,(Assigned,SP)=>new {Assigned.Charge,SP.UserId,SP.Contact,Assigned.Service,Assigned.ServiceProviderFK })
-                .Join(SerObj.Users, g => g.UserId, u => u.Id, (g, u) => new {g.Charge,g.Service,g.Contact,u.Username,g.ServiceProviderFK})
-                .Where(g => g.Service.Service == service).Select(i => i);
+            //var ServiceProviders = SerObj.ServicesAssigned.Include("Service").Include("SP")
+            //    .Join(SerObj.ServiceProviders,Assigned=>Assigned.ServiceProviderFK,SP=>SP.Id,(Assigned,SP)=>new {Assigned.Charge,SP.UserId,SP.Contact,Assigned.Service,Assigned.ServiceProviderFK })
+            //    .Join(SerObj.Users, g => g.UserId, u => u.Id, (g, u) => new {g.Charge,g.Service,g.Contact,u.Username,g.ServiceProviderFK})
+            //    .Where(g => g.Service.Service == service).Select(i => i);
+            var ServiceProviders = from a in SerObj.Users
+                                   join b in SerObj.ServicesAssigned on a.Id equals b.SP.UserId
+                                   select new { a.Id,
+                                       a.Username,
+                                       b.Service.Service,
+                                       b.Charge,
+                                       b.ServiceProviderFK,
+                                       
+                                   };
+                                
 
             foreach (var i in ServiceProviders)
             {
                 var ServiceObj = new ServiceProviderModel();
+                if(i.Service==service)
+                    { 
                 ServiceObj.ServiceProviderId = i.ServiceProviderFK;
                 
                 ServiceObj.ServiceProviderName = i.Username;
-                ServiceObj.Rating = Data.Average(i.ServiceProviderFK);
+                ServiceObj.Rating = Data.Average(i.Id);
                 ServiceObj.CustomerId = Id;
                 ServiceObj.Price = i.Charge;
                 SPList.Add(ServiceObj);
+                }
             }
             return SPList;
         }

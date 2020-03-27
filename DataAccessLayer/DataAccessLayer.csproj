@@ -14,11 +14,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataAccessLayer</RootNamespace>
     <AssemblyName>DataAccessLayer</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -155,13 +156,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202003170417301_change.cs" />
-    <Compile Include="Migrations\202003170417301_change.Designer.cs">
-      <DependentUpon>202003170417301_change.cs</DependentUpon>
+    <Compile Include="Migrations\202003260932187_asd.cs" />
+    <Compile Include="Migrations\202003260932187_asd.Designer.cs">
+      <DependentUpon>202003260932187_asd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\reviewmodel.cs" />
     <Compile Include="Data.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ListOrder.cs" />
     <Compile Include="Models\OrderData.cs" />
     <Compile Include="Models\Profile.cs" />
@@ -194,8 +195,8 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003170417301_change.resx">
-      <DependentUpon>202003170417301_change.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003260932187_asd.resx">
+      <DependentUpon>202003260932187_asd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
