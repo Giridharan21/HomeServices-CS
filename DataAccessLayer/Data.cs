@@ -119,7 +119,8 @@ namespace DataAccessLayer
             //    .Where(g => g.Service.Service == service).Select(i => i);
             var ServiceProviders = from a in SerObj.Users
                                    join b in SerObj.ServicesAssigned on a.Id equals b.SP.UserId
-                                   select new { a.Id,
+                                   where b.Service.Service==service
+                                   select new {a.Id,
                                        a.Username,
                                        b.Service.Service,
                                        b.Charge,
@@ -131,8 +132,7 @@ namespace DataAccessLayer
             foreach (var i in ServiceProviders)
             {
                 var ServiceObj = new ServiceProviderModel();
-                if(i.Service==service)
-                    { 
+               
                 ServiceObj.ServiceProviderId = i.ServiceProviderFK;
                 
                 ServiceObj.ServiceProviderName = i.Username;
@@ -140,7 +140,7 @@ namespace DataAccessLayer
                 ServiceObj.CustomerId = Id;
                 ServiceObj.Price = i.Charge;
                 SPList.Add(ServiceObj);
-                }
+                
             }
             return SPList;
         }
@@ -288,13 +288,13 @@ namespace DataAccessLayer
             ContextObj.SaveChanges();
 
         }
-        public static void AddReview(reviewmodel model)
+        public static void AddReview(reviewmodel model,int orderid)
         {
             ServicesContext a = new ServicesContext();
             Review r = new Review();
             r.Stars = model.Stars;
             r.Comment = model.Comment;
-            r.OrderIdFK = 1;
+            r.OrderIdFK = orderid;
             a.Reviews.Add(r);
             a.SaveChanges();
 
