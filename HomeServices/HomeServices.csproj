@@ -207,11 +207,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Common.css" />
+    <Content Include="Content\Everything.css" />
+    <Content Include="Content\Index.css" />
+    <Content Include="Content\Register.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -257,7 +261,6 @@
     <Content Include="Views\Register\customer.cshtml" />
     <Content Include="Views\Register\ServiceProvider.cshtml" />
     <Content Include="Views\Payment\Pay.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\review\Index.cshtml" />
     <Content Include="Views\Provider\Index.cshtml" />

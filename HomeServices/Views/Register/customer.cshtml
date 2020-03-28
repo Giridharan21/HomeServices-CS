@@ -1,33 +1,37 @@
 ﻿@model DataAccessLayer.Models.CustomerRegisterClass
-@{
-    Layout = null;
-}
+
 
 @{
     ViewBag.Title = "customer";
 }
-@using (Html.BeginForm("customer", "Register", FormMethod.Post))
-{
+    <div class="Register">
+        <h2>Registeration for Customer</h2>
+        @using (Html.BeginForm("customer", "Register", FormMethod.Post))
+        {
 
-    <span>UserName:</span>@Html.TextBoxFor(g => g.Username);<br />
-    <span>Password:</span>@Html.PasswordFor(g => g.Password);<br />
-    <span>ConfirmPassword:</span>@Html.PasswordFor(g => g.ConfirmPassword);<br />
+            <span>UserName:</span><br />@Html.TextBoxFor(g => g.Username);<br />
+            <span>Password:</span><br />@Html.PasswordFor(g => g.Password);<br />
+            <span>ConfirmPassword:</span><br />@Html.PasswordFor(g => g.ConfirmPassword);<br />
 
-    <span>EmailId:</span>@Html.TextBoxFor(g => g.Emailid);<br />
+            <span>EmailId:</span><br />@Html.TextBoxFor(g => g.Emailid);<br />
 
-    <span>ContactNumber:</span>@Html.TextBoxFor(g => g.Contact);<br />
+            <span>ContactNumber:</span><br />@Html.TextBoxFor(g => g.Contact);<br />
 
-    <span>Location:</span>@Html.TextBoxFor(g => g.Location);<br />
-
-
-
-    <span>BankName:</span>@Html.TextBoxFor(g => g.BankName);<br />
-
-    <span>BankAccount Number:</span>@Html.TextBoxFor(g => g.BankAccNumber);<br />
+            <span>Location:</span><br />@Html.TextBoxFor(g => g.Location);<br />
 
 
-    <input type="submit" value="Register" />
-    @Html.ValidationSummary()
-}
 
+            <span>BankName:</span><br />@Html.TextBoxFor(g => g.BankName);<br />
+
+            <span>BankAccount Number:</span><br />@Html.TextBoxFor(g => g.BankAccNumber);<br />
+
+            <br />
+            <div>
+                <input type="submit" value="Register" />
+            </div>
+
+            @Html.ValidationSummary()
+        }
+
+    </div>
 

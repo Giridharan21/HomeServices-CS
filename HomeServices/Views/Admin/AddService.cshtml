@@ -1,10 +1,4 @@
 ﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -14,9 +8,11 @@
     <h3>Add Service</h3>
     <article>
         @using (Html.BeginForm("AddService", "Admin", FormMethod.Post)) {
-            <span>Enter a Service Name To Add</span>
+            <span>Enter a Service Name to add</span>
+            <br />
             <br />
             @Html.TextBox("Service", "", new { @Placeholder = "Enter a Service" })
+            
             <input type="submit" value="Add" />
         }
     </article>

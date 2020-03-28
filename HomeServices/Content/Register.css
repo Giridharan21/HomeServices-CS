@@ -1,0 +1,26 @@
+﻿.Register{
+    margin-left:35%;
+    width:25%;
+    padding:20px 30px;
+    color:black;
+}
+.Register input{
+    width:100%;
+    padding:2px;
+    margin-bottom:10px;
+}
+.Register select,option{
+    width:102%;
+    padding:2px;
+    margin-bottom:10px;
+}
+.Register div input{
+    width:20%;
+
+}
+.Register div{
+    text-align:center;
+}
+.Register h2{
+    color:white;
+}

@@ -1,57 +1,47 @@
 ﻿@model DataAccessLayer.Models.Login
 @{
-    ViewBag.Title = "Index";
-    Layout = null;
+    ViewBag.Title = "Login";
 }
-<!DOCTYPE html>
 <html>
 
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
-    <style>
-        body {
-            background-image: url('../../Content/10.jpg');
-        }
-
-        form {
-            margin-top: 10%;
-        }
-
-        h2 {
-            text-align: center;
-        }
-    </style>
 </head>
-<body>
+<body id="login">
     @using (Html.BeginForm("Login", "Login", FormMethod.Post))
     {
-        <table align="center" border="1">
+        <table >
             <tr>
                 <td>
                     Username
-                </td>
-                <td>
+                    <br />
+                    <br />
                     @Html.TextBoxFor(m => m.UserName)
-
+                    <br />
                 </td>
             </tr>
             <tr>
                 <td>
                     Password
-                </td>
-                <td>
-                    @Html.PasswordFor(m => m.Password)
-
+                    <br />
+                    <br />
+                @Html.PasswordFor(m => m.Password)
+                    <br />
                 </td>
 
             <tr>
+                <td id="submit">
+                    <input type="Submit" value="Login" />
+                </td>
+            </tr>
+            <tr>
                 <td>
-                    <input type="Submit" width="100" value="Login" />
+                    @Html.ValidationSummary()
                 </td>
             </tr>
         </table>
-        @Html.ValidationSummary()
+       
 
 
     }

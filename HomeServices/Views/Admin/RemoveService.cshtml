@@ -1,10 +1,4 @@
 ﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -15,6 +9,7 @@
     <article>
         @using (Html.BeginForm("RemoveService", "Admin", FormMethod.Post)) {
             <span>Enter a Service Name To Remove</span>
+            <br />
             <br />
             @Html.TextBox("Service", "", new { @Placeholder = "Enter a Service" })
             <input type="submit" value="Add" />

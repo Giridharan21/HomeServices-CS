@@ -13,6 +13,7 @@ namespace HomeServices.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            ViewBag.Msg = "";
             Session["Admin"] = null;
             return View();
         }
@@ -33,7 +34,8 @@ namespace HomeServices.Controllers
                 else if ( LoggedInUser.Type == "SERVICE PROVIDER")
                     return RedirectToAction("Dashboard", "Provider");
             }
-            ViewBag.Msg = "alert('Invalid User')";
+            
+                
             return View();
         }
 

@@ -2,23 +2,51 @@
     height:100%;
 }
 *{
+   font-family:Arial, Helvetica, sans-serif;
    margin-top:0;
    padding:0;
 }
-header{
-    height:75%;
-    background-color:#daad86;
-    color:white;
+/*
+   #17252a black
+    #2b7a78 dark blue
+    #3aafa9  blue
+    #def2f1 light blue
+    white feffff
+*/
+header {
+    padding: 20px;
+    height: 25%;
+    
+    background-color: #17252a;
+    color: #feffff;
 }
 #header-content nav,h1{
   text-align:center;
   text-decoration:none;
 }
 article {
-    background-color: #659dbd;
-    height:200%;
+    padding: 20px;
+    background-color: #3aafa9;
+    height: 60%;
+    min-height: 500px;
+    text-align: center;
+    color: #feffff;
+    width:100%;
 }
-footer{
-    height:10%;
-    background-color:antiquewhite;
+footer {
+    padding: 20px;
+    height: 15%;
+    color: #17252a;
+    background-color: #def2f1;
 }
+nav a {
+    color: #feffff;
+    text-decoration: none;
+    margin-right: 15px;
+    padding: 5px 0px;
+}
+    nav a:hover {
+        color: #def2f1;
+        border-top:1px solid white;
+        border-bottom:1px solid white;
+    }

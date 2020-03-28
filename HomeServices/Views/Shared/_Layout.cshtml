@@ -3,12 +3,34 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title - Home Services</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/Everything.css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <header>
+        <div id="header-content">
+            <h1>Home Services</h1>
+            <nav id="header-nav">
+                <a href="#">Home</a>
+                <a href="~/Login/Login" id="LogIn">Login</a>
+                <a href="~/Register/customer">C Register</a>
+                <a href="~/Register/ServiceProvider">SP Register</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+    <article>
+        @RenderBody()
+    </article>
+    <footer>
+        <div id="footer-content">
+            <h4>&copy;Home Services 2020</h4>
+            <p>Contact: 1234567890</p>
+        </div>
+    </footer>
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,10 +55,8 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
-    </div>
+    </div>*@
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+   
 </body>
 </html>

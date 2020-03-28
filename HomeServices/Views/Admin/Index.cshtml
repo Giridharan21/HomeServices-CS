@@ -1,19 +1,17 @@
 ﻿
 @{
-    Layout = null;
 }
 
-<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Admin</title>
 </head>
-<body>
-    <h3>Admin Page</h3>
-    <h5><a href="~/Admin/AddService">Add Service</a></h5>
-    <h5><a href="~/Admin/RemoveService">Remove Service</a></h5>
+<body id="admin">
+    <h2>Welcome Admin!..</h2>
+    <div class="a" ><a href="~/Admin/AddService">Add Service</a></div>
+    <div class="a"><a href="~/Admin/RemoveService">Remove Service</a></div>
     <script>
         @Html.Raw(ViewBag.Result);
     </script>
