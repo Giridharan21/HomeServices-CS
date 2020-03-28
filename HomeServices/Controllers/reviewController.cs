@@ -10,16 +10,18 @@ namespace HomeServices.Controllers
     public class reviewController : Controller
     {
         // GET: review
-        public ActionResult Index()
+        public ActionResult Index(int OrderId)
         {
+            Session["orderid"] = OrderId;
             return View();
         }
         [HttpPost]
         public ActionResult Index(reviewmodel model)
         {
+            int orderid = int.Parse(Session["orderid"].ToString());
             if(ModelState.IsValid)
             {
-                Data.AddReview(model);
+                Data.AddReview(model,orderid);
                 return View();
             }
             return View();

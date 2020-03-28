@@ -257,9 +257,9 @@
                             @i.price
                         </td>
                         <td>
-                            @using (Html.BeginForm("ChangeStatus", "CustomerDashboard", FormMethod.Post))
+                            @using (Html.BeginForm("Index", "review", FormMethod.Get))
                             {
-                                <input type="hidden" name="CustomerId" value=@i.id />
+                                <input type="hidden" name="OrderId" value=@i.id />
 
 
                                 <input type="submit" value="Add Review" />

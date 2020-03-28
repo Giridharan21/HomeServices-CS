@@ -3,7 +3,7 @@ namespace DataAccessLayer.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class change : DbMigration
+    public partial class asd : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,7 @@ namespace DataAccessLayer.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         BankName = c.String(),
-                        AccountNumber = c.String(maxLength:18),
+                        AccountNumber = c.String(nullable: false, maxLength: 20),
                         Balance = c.Decimal(nullable: false, precision: 10, scale: 2),
                     })
                 .PrimaryKey(t => t.Id)
@@ -114,7 +114,7 @@ namespace DataAccessLayer.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Service = c.String(nullable: false,maxLength:20),
+                        Service = c.String(nullable: false, maxLength: 16),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Service, unique: true);
