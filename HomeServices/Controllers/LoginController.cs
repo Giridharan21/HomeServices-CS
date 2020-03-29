@@ -31,11 +31,12 @@ namespace HomeServices.Controllers
                 Session["UserData"] = LoggedInUser;
                 if (LoggedInUser.Type == "CUSTOMER")
                     return RedirectToAction("Dashboard", "CustomerDashboard");
-                else if ( LoggedInUser.Type == "SERVICE PROVIDER")
+                else if (LoggedInUser.Type == "SERVICE PROVIDER")
                     return RedirectToAction("Dashboard", "Provider");
+                else
+                    ViewBag.Msg = "alert('Invalid User')";
             }
             
-                
             return View();
         }
 
