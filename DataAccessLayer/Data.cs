@@ -18,7 +18,7 @@ namespace DataAccessLayer
             ServicesContext db = new ServicesContext();
             var SPId = db.ServiceProviders.Where(g => g.UserId == Id).Select(g => g.Id).FirstOrDefault();
             var res = from a in db.Orders
-                      where SPId==a.ToFK
+                      where a.ToFK==SPId
                       select a;
 
             foreach (var b in res)
@@ -136,7 +136,10 @@ namespace DataAccessLayer
                 ServiceObj.ServiceProviderId = i.ServiceProviderFK;
                 
                 ServiceObj.ServiceProviderName = i.Username;
-                ServiceObj.Rating = Data.Average(i.Id);
+                var rat = Data.Average(i.ServiceProviderFK);
+               
+                ServiceObj.Rating =Math.Round( (double)rat.GetValueOrDefault(),2);
+                
                 ServiceObj.CustomerId = Id;
                 ServiceObj.Price = i.Charge;
                 SPList.Add(ServiceObj);
@@ -148,9 +151,12 @@ namespace DataAccessLayer
         public static decimal? Average(int id)
         {
             using (ServicesContext service = new ServicesContext())
-            { 
-                var avg = service.Reviews.Where(i => i.Orders.UserTo.Id == id).Select(i => i.Stars).Average();
-                decimal? average = avg;
+            {
+                var avg = (from a in service.Reviews
+                           where a.Orders.ToFK == id
+                           select a.Stars).Average();
+                // var avg = service.Reviews.Where(i => i.Orders.UserTo.Id == id).Select(i => i.Stars).Average();
+                decimal ? average = avg;
                 return average;
             }
         }

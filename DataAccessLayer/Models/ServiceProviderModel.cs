@@ -11,7 +11,7 @@ namespace DataAccessLayer.Models
     {
         public int ServiceProviderId { get; set; }
         public string ServiceProviderName { get; set; }
-        public decimal? Rating { get; set; }
+        public double? Rating { get; set; }
         public DateTime ScheduledDate { get; set; }
         public int CustomerId { get; set; }
         public decimal Price { get; set; }

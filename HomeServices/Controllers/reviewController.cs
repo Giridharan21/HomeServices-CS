@@ -22,7 +22,7 @@ namespace HomeServices.Controllers
             if(ModelState.IsValid)
             {
                 Data.AddReview(model,orderid);
-                return View();
+                return RedirectToAction("MyOrders","CustomerDashboard");
             }
             return View();
         }
