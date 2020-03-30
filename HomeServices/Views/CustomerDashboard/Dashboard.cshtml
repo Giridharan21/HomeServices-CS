@@ -1,11 +1,10 @@
-﻿
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1> <a href="../CustomerDashboard/ViewServices">Place Order</a></h1>
-    <h1> <a href="../CustomerDashboard/MyOrders">Previous Order</a></h1>
-</body>
-</html>
+﻿<div class="Dashboard">
+    <h2>Customer Dashboard..</h2>
+    <div class="a"><a href="../CustomerDashboard/ViewServices">Place Order</a></div>
+    <div class="a"><a href="../CustomerDashboard/MyOrders">Previous Order</a></div>
+    <div class="a"><a href="~/Profile/ViewProfile">My Profile</a></div>
+</div>
+<h3>v @ViewBag.Login</h3>
+<script>
+    LogInInfo = ("@ViewBag.Login");
+</script>

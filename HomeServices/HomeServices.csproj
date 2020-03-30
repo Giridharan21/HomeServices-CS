@@ -194,6 +194,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CustomerDashboardController.cs" />
     <Compile Include="Controllers\DesignController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\reviewController.cs" />
@@ -201,13 +202,16 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Filter Class\CustomExceptions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ControllerMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Admin.css" />
+    <Content Include="Content\CustomerDesgins.css" />
+    <Content Include="Content\Dashboard.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -223,6 +227,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\HeaderScript.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -232,6 +237,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JsForAllViews.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -275,10 +281,14 @@
     <Content Include="Views\Admin\RemoveService.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Profile\ViewProfile.cshtml" />
+    <Content Include="Views\Shared\InvalidAccess.cshtml" />
+    <Content Include="Views\Shared\InvalidArgument.cshtml" />
+    <Content Include="Views\Shared\Unknown.cshtml" />
+    <Content Include="Views\Shared\Error404.cshtml" />
+    <Content Include="Views\Error\HTTP404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

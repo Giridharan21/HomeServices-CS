@@ -11,7 +11,9 @@ namespace HomeServices.Controllers
     {
         // GET: Admin
         public ActionResult Index() {
-            if(Session["Admin"] is null) {
+            ViewBag.Login = "Admin";
+
+            if (Session["Admin"] is null) {
                 return Redirect("~/login/login");
             }
             return View();

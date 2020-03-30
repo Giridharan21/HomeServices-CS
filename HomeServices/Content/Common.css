@@ -1,5 +1,7 @@
 ﻿body{
     height:100%;
+    padding:0;
+    margin:0;
 }
 *{
    font-family:Arial, Helvetica, sans-serif;
@@ -16,7 +18,8 @@
 header {
     padding: 20px;
     height: 25%;
-    
+    width: 98%;
+    padding: 1%;
     background-color: #17252a;
     color: #feffff;
 }
@@ -25,19 +28,21 @@ header {
   text-decoration:none;
 }
 article {
-    padding: 20px;
+    width:98%;
+    padding: 1%;
     background-color: #3aafa9;
     height: 60%;
     min-height: 500px;
     text-align: center;
     color: #feffff;
-    width:100%;
 }
 footer {
     padding: 20px;
     height: 15%;
     color: #17252a;
     background-color: #def2f1;
+    width: 98%;
+    padding: 1%;
 }
 nav a {
     color: #feffff;
@@ -45,8 +50,8 @@ nav a {
     margin-right: 15px;
     padding: 5px 0px;
 }
-    nav a:hover {
-        color: #def2f1;
-        border-top:1px solid white;
-        border-bottom:1px solid white;
-    }
+nav a:hover {
+    color: #def2f1;
+    border-top:1px solid white;
+    border-bottom:1px solid white;
+}

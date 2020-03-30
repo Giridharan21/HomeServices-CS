@@ -1,26 +1,27 @@
-﻿form {
-    margin-top:40px;
-    text-align:left;
-    width:100%;
+﻿form.auth {
+    margin-top: 40px;
+    text-align: left;
+    width: 100%;
 }
-table {
+table.auth {
     border: 1px solid black;
     padding: 30px;
-    width:30%;
-    margin-left:35%;
+    width: 30%;
+    margin-left: 35%;
 }
-h2 {
+#login h2 {
     text-align: center;
 }
-#login input{
+#login input {
     padding:3px 0px;
     width:100%;
     margin-bottom: 30px;
 }
-#login td#submit input{
+#login td#submit input {
     width:25%;
     padding:5px 0px;
     font-size:15px;
+    margin-bottom:10px;
 }
 #login td#submit{
     text-align:center;

@@ -1,14 +1,10 @@
-﻿
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>PlaceOrder</title>
-</head>
-<body>
-    @using (Html.BeginForm("ViewServiceProvider", "CustomerDashboard", FormMethod.Post))
-    {
-        @Html.DropDownList("Service", (SelectList)ViewBag.result)
-        <input type="submit" value="Select" />
-    }
-</body>
-</html>
+﻿@{ 
+    ViewBag.Title = "Select Service";
+}
+    <div>
+        <h2>Select the service you need</h2>
+        @using (Html.BeginForm("ViewServiceProvider", "CustomerDashboard", FormMethod.Post)) {
+            @Html.DropDownList("Service", (SelectList)ViewBag.result)
+            <input type="submit" value="Select" />
+        }
+    </div>

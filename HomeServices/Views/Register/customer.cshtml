@@ -6,7 +6,7 @@
 }
     <div class="Register">
         <h2>Registeration for Customer</h2>
-        @using (Html.BeginForm("customer", "Register", FormMethod.Post))
+        @using (Html.BeginForm("customer", "Register", FormMethod.Post,new { @class="auth"}))
         {
 
             <span>UserName:</span><br />@Html.TextBoxFor(g => g.Username);<br />

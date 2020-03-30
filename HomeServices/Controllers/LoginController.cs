@@ -13,7 +13,7 @@ namespace HomeServices.Controllers
         // GET: Login
         public ActionResult Login()
         {
-            ViewBag.Msg = "";
+            ViewBag.Login = "NotLoggedIn";
             Session["Admin"] = null;
             return View();
         }
@@ -29,14 +29,19 @@ namespace HomeServices.Controllers
                Session["Admin"] = null;
                 UserInfoModel LoggedInUser = Data.Addlogin(Model);
                 Session["UserData"] = LoggedInUser;
-                if (LoggedInUser.Type == "CUSTOMER")
+                if (LoggedInUser.Type == "CUSTOMER") {
                     return RedirectToAction("Dashboard", "CustomerDashboard");
-                else if (LoggedInUser.Type == "SERVICE PROVIDER")
+                }
+                else if (LoggedInUser.Type == "SERVICE PROVIDER") {
+                    ViewBag.Login = "ServiceProvider";
                     return RedirectToAction("Dashboard", "Provider");
-                else
-                    ViewBag.Msg = "alert('Invalid User')";
+                }
+                else { 
+                    ViewBag.Login = "Invalid User";
+                    return View();
+                }
             }
-            
+            ViewBag.Login = "LoginFailed";
             return View();
         }
 

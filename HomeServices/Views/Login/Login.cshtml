@@ -9,11 +9,12 @@
     <title>Login</title>
 </head>
 <body id="login">
-    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
-    {
-        <table >
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "auth" })) {
+        <table class="auth">
             <tr>
+
                 <td>
+                    <h2>Login</h2>
                     Username
                     <br />
                     <br />
@@ -26,7 +27,7 @@
                     Password
                     <br />
                     <br />
-                @Html.PasswordFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password)
                     <br />
                 </td>
 
@@ -41,12 +42,9 @@
                 </td>
             </tr>
         </table>
-       
-
-
     }
     <script>
-        @Html.Raw(ViewBag.Msg);
+        LogInInfo = ("@ViewBag.Login");
     </script>
 </body>
 </html>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DataAccessLayer;
 using DataAccessLayer.Models;
+using HomeServices.Models;
 namespace HomeServices.Controllers
 {
     public class CustomerDashboardController : Controller
@@ -12,8 +13,11 @@ namespace HomeServices.Controllers
         // GET: CustomerDashboard
         public ActionResult Dashboard()
         {
+            ViewBag.Login = "Customer";
             return View();
         }
+
+
         public ActionResult ViewServices()
         {
             var result = Data.ServiceList();
@@ -50,6 +54,12 @@ namespace HomeServices.Controllers
             ViewBag.Payment = (string)Session["Payment"];
             Data.ChangeStatus(OrderId, Status);
             return RedirectToAction("MyOrders", "CustomerDashboard");
+        }
+        private int SetLogInInfo(string type) {
+            if (type == "Customer") {
+                ViewBag.Login = "Customer";
+            }
+            return 1;
         }
     }
 }

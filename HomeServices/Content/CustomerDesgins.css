@@ -1,0 +1,23 @@
+﻿.CustomerList{
+    text-align:center;
+}
+.CustomerList_Table {
+    width: 80%;
+    margin-left: 10%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.CustomerList_Table td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.CustomerList_Table td, th {
+    color:black;    
+    padding: 5px;
+}
+CustomerList_Table th {
+    color: white;
+}
+.CustomerList_Table  td button{
+    padding:5px;
+}
